@@ -1,68 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wiggly Woosh</title>
-    <link rel="stylesheet" href="src/css/reset.css">
+    <title>Wiggly Woosh — The Future of Pet Care</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="src/css/variables.css">
     <link rel="stylesheet" href="src/css/global.css">
-    <link rel="stylesheet" href="src/css/header.css">
-    <link rel="stylesheet" href="src/css/hero.css">
-    <link rel="stylesheet" href="src/css/features.css">
-    <link rel="stylesheet" href="src/css/products.css">
-    <link rel="stylesheet" href="src/css/testimonials.css">
-    <link rel="stylesheet" href="src/css/how-it-works.css">
-    <link rel="stylesheet" href="src/css/pricing.css">
-    <link rel="stylesheet" href="src/css/faq.css">
-    <link rel="stylesheet" href="src/css/cta.css">
-    <link rel="stylesheet" href="src/css/footer.css">
     <link rel="stylesheet" href="src/css/animations.css">
-    <link rel="stylesheet" href="src/fonts/fonts.css">
 </head>
+
 <body>
-    <header>
-        <!-- Include header section -->
-        <div id="header"></div>
+
+    <!-- ========== STICKY MOBILE WAITLIST BAR ========== -->
+    <div class="mobile-sticky-cta">
+        <a href="#waitlist" class="btn btn--primary btn--full">Join the Waitlist</a>
+    </div>
+
+    <!-- ========== HEADER / NAVBAR (Vetic Style) ========== -->
+    <header class="site-header" id="header">
+        <nav class="navbar">
+            <div class="container navbar__container">
+                <a href="/" class="navbar__logo" aria-label="Wiggly Woosh Home">
+                    <!-- Replace with your logo image when available -->
+                    <!-- <img src="src/assets/logo.svg" alt="Wiggly Woosh" width="160" height="40"> -->
+                    <span class="navbar__logo-text">
+                        <span class="logo-wiggly">Wiggly</span>
+                        <span class="logo-woosh">Woosh</span>
+                    </span>
+                </a>
+
+                <ul class="navbar__links" id="navLinks">
+                    <li><a href="#ecosystem">Ecosystem</a></li>
+                    <li><a href="#the-tech">The Tech</a></li>
+                    <li><a href="#why-data">Why Data?</a></li>
+                    <li><a href="#partner" class="navbar__link--portal">Partner with Us</a></li>
+                </ul>
+
+                <a href="#waitlist" class="btn btn--primary navbar__cta">Join the Future of Pet Care</a>
+
+                <button class="navbar__hamburger" id="hamburgerBtn" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
     </header>
-    
+
     <main>
-        <!-- Include hero section -->
-        <section id="hero"></section>
-        
-        <!-- Include features section -->
-        <section id="features"></section>
-        
-        <!-- Include products section -->
-        <section id="products"></section>
-        
-        <!-- Include how it works section -->
-        <section id="how-it-works"></section>
-        
-        <!-- Include testimonials section -->
-        <section id="testimonials"></section>
-        
-        <!-- Include pricing section -->
-        <section id="pricing"></section>
-        
-        <!-- Include FAQ section -->
-        <section id="faq"></section>
-        
-        <!-- Include call to action section -->
-        <section id="cta"></section>
+
+        <!-- ========== HERO SECTION (Supertails Mix) ========== -->
+        <section class="hero" id="hero">
+            <div class="container hero__container">
+                <div class="hero__content">
+                    <p class="hero__eyebrow">🐾 India's First Smart Pet Health Ecosystem</p>
+                    <h1 class="hero__headline">
+                        Expert care meets<br>
+                        <span class="text-gradient">effortless technology.</span>
+                    </h1>
+                    <p class="hero__subheadline">
+                        We've integrated a smart wearable with an AI-driven feeder to create
+                        the first <strong>self-correcting health loop</strong> for your pet.
+                    </p>
+                    <div class="hero__actions">
+                        <a href="#waitlist" class="btn btn--primary btn--lg">Join the Waitlist</a>
+                        <a href="#the-tech" class="btn btn--outline btn--lg">See How It Works</a>
+                    </div>
+                    <div class="hero__stats">
+                        <div class="hero__stat">
+                            <span class="hero__stat-number">24/7</span>
+                            <span class="hero__stat-label">Health Monitoring</span>
+                        </div>
+                        <div class="hero__stat-divider"></div>
+                        <div class="hero__stat">
+                            <span class="hero__stat-number">±2%</span>
+                            <span class="hero__stat-label">Portion Accuracy</span>
+                        </div>
+                        <div class="hero__stat-divider"></div>
+                        <div class="hero__stat">
+                            <span class="hero__stat-number">AI</span>
+                            <span class="hero__stat-label">Adaptive Engine</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero__visual">
+                    <div class="hero__image-wrapper">
+                        <!-- Replace with actual product/pet imagery -->
+                        <div class="hero__placeholder-img">
+                            <div class="hero__placeholder-pet">
+                                <span>🐕</span>
+                                <p>Happy & Healthy Pet</p>
+                            </div>
+                            <div class="hero__placeholder-device">
+                                <span>⌚</span>
+                                <p>Smart Brooch + Feeder</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== SOCIAL PROOF BAR ========== -->
+        <section class="social-proof">
+            <div class="container social-proof__container">
+                <p>In collaboration with</p>
+                <div class="social-proof__logos">
+                    <div class="social-proof__item">
+                        <strong>🎓 Dayananda Sagar College of Engineering</strong>
+                    </div>
+                    <div class="social-proof__divider"></div>
+                    <div class="social-proof__item">
+                        <span>Patent Published</span>
+                        <strong>202641027315 A</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ECOSYSTEM OVERVIEW ========== -->
+        <section class="ecosystem" id="ecosystem">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-eyebrow">The Ecosystem</p>
+                    <h2 class="section-title">One loop. Complete health.</h2>
+                    <p class="section-subtitle">
+                        Three intelligent components working in harmony — tracking, thinking, and feeding —
+                        so your pet gets exactly what they need, when they need it.
+                    </p>
+                </div>
+                <div class="ecosystem__grid">
+                    <div class="eco-card fade-in">
+                        <div class="eco-card__icon">📡</div>
+                        <h3 class="eco-card__title">Smart Brooch</h3>
+                        <p class="eco-card__desc">A lightweight wearable that tracks heart rate, temperature, activity
+                            levels, and behavioral patterns in real time.</p>
+                    </div>
+                    <div class="eco-card fade-in">
+                        <div class="eco-card__icon">🧠</div>
+                        <h3 class="eco-card__title">AI Health Engine</h3>
+                        <p class="eco-card__desc">Our proprietary algorithm calculates metabolic energy expenditure and
+                            converts it into precise nutritional requirements.</p>
+                    </div>
+                    <div class="eco-card fade-in">
+                        <div class="eco-card__icon">🍽️</div>
+                        <h3 class="eco-card__title">Smart Feeder</h3>
+                        <p class="eco-card__desc">Dispenses the exact portion of food your pet needs — no overfeeding,
+                            no guesswork. UV-C disinfected for hygiene.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== THE METABOLIC FEEDBACK LOOP (How It Works) ========== -->
+        <section class="how-it-works" id="the-tech">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-eyebrow">The Tech Core</p>
+                    <h2 class="section-title">The Metabolic Feedback Loop</h2>
+                    <p class="section-subtitle">
+                        A self-correcting cycle that continuously adapts to your pet's real-time health data.
+                    </p>
+                </div>
+                <div class="steps-scroller">
+                    <div class="step-card fade-in">
+                        <div class="step-card__number">01</div>
+                        <div class="step-card__icon">💓</div>
+                        <h3 class="step-card__title">Track</h3>
+                        <p class="step-card__desc">
+                            The Smart Brooch continuously monitors heart rate, body temperature, and activity levels
+                            throughout the day.
+                        </p>
+                    </div>
+                    <div class="step-card__connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow">→</div>
+                    </div>
+                    <div class="step-card fade-in">
+                        <div class="step-card__number">02</div>
+                        <div class="step-card__icon">⚡</div>
+                        <h3 class="step-card__title">Calculate</h3>
+                        <p class="step-card__desc">
+                            AI analyzes the biometric data to calculate real-time energy expenditure and nutritional
+                            needs using metabolic modeling.
+                        </p>
+                    </div>
+                    <div class="step-card__connector">
+                        <div class="connector-line"></div>
+                        <div class="connector-arrow">→</div>
+                    </div>
+                    <div class="step-card fade-in">
+                        <div class="step-card__number">03</div>
+                        <div class="step-card__icon">🎯</div>
+                        <h3 class="step-card__title">Dispense</h3>
+                        <p class="step-card__desc">
+                            The Smart Feeder receives instructions and dispenses the exact required portion —
+                            automatically and hygienically.
+                        </p>
+                    </div>
+                </div>
+                <p class="steps-patent">Publication No. <strong>202641027315 A</strong></p>
+            </div>
+        </section>
+
+        <!-- ========== HARDWARE SPOTLIGHT (Product Cards) ========== -->
+        <section class="products" id="products">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-eyebrow">Hardware Spotlight</p>
+                    <h2 class="section-title">Built for pets. Engineered for precision.</h2>
+                </div>
+                <div class="products__grid">
+                    <!-- Smart Brooch Card -->
+                    <div class="product-card fade-in">
+                        <div class="product-card__badge">Wearable</div>
+                        <div class="product-card__image">
+                            <div class="product-placeholder">
+                                <span>📡</span>
+                            </div>
+                        </div>
+                        <div class="product-card__body">
+                            <h3 class="product-card__title">Smart Brooch</h3>
+                            <p class="product-card__desc">
+                                Compact, lightweight health tracker designed to attach securely to any collar or
+                                harness.
+                            </p>
+                            <ul class="product-card__features">
+                                <li>
+                                    <span class="feature-icon">💓</span>
+                                    <span>Real-time Heart Rate & Temperature</span>
+                                </li>
+                                <li>
+                                    <span class="feature-icon">🏃</span>
+                                    <span>Tri-axis Activity Tracking</span>
+                                </li>
+                                <li>
+                                    <span class="feature-icon">🔔</span>
+                                    <span>Vital Anomaly Alerts</span>
+                                </li>
+                                <li>
+                                    <span class="feature-icon">🔋</span>
+                                    <span>7-Day Battery Life</span>
+                                </li>
+                                <li>
+                                    <span class="feature-icon">💧</span>
+                                    <span>IP67 Water Resistant</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Smart Feeder Card -->
+                    <div class="product-card fade-in">
+                        <div class="product-card__badge product-card__badge--accent">Feeder</div>
+                        <div class="product-card__image">
+                            <div class="product-placeholder product-placeholder--accent">
+                                <span>🍽️</span>
+                            </div>
+                        </div>
+                        <div class="product-card__body">
+                            <h3 class="product-card__title">Smart Feeder</h3>
+                            <p class="product-card__desc">
+                                AI-connected feeder with precision dispensing and built-in hygiene technology.
+                            </p>
+                            <ul class="product-card__features">
+                                <li>
+                                    <span class="feature-icon">🎯</span>
+                                    <span>Precision Portion Dispensing (±2%)</span>
+                                </li>
+                                <li>
+                                    <span class="feature-icon">🔬</span>
+                                    <span>UV-C Disinfection Chamber</span>
+                                </li>
+                                <li>
+                                    <span class="feature-icon">📱</span>
+                                    <span>App-Controlled Scheduling</span>
+                                </li>
+                                <li>
+                                    <span class="feature-icon">🔄</span>
+                                    <span>Auto-Calibrating Mechanism</span>
+                                </li>
+                                <li>
+                                    <span class="feature-icon">🧹</span>
+                                    <span>Easy-Clean Detachable Bowl</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== WHY DATA? / PROACTIVE CARE (Clinical Edge) ========== -->
+        <section class="proactive-care" id="why-data">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-eyebrow">The Clinical Edge</p>
+                    <h2 class="section-title">Proactive care, not reactive visits.</h2>
+                    <p class="section-subtitle">
+                        Our AI detects vital anomalies <em>before</em> symptoms manifest — giving you and your vet a
+                        head start.
+                    </p>
+                </div>
+                <div class="dashboard-preview fade-in">
+                    <div class="dashboard-preview__header">
+                        <div class="dashboard-dot dashboard-dot--red"></div>
+                        <div class="dashboard-dot dashboard-dot--yellow"></div>
+                        <div class="dashboard-dot dashboard-dot--green"></div>
+                        <span class="dashboard-preview__title">Wiggly Woosh Health Dashboard</span>
+                    </div>
+                    <div class="dashboard-preview__body">
+                        <div class="dashboard-panel">
+                            <div class="dashboard-panel__header">
+                                <span class="dashboard-panel__icon">🐕</span>
+                                <div>
+                                    <h4>Buddy</h4>
+                                    <p class="dashboard-panel__breed">Golden Retriever · 3 yrs</p>
+                                </div>
+                                <span class="dashboard-status dashboard-status--good">● Healthy</span>
+                            </div>
+                            <div class="dashboard-vitals">
+                                <div class="vital-card">
+                                    <span class="vital-card__label">Heart Rate</span>
+                                    <span class="vital-card__value">82 <small>bpm</small></span>
+                                    <div class="vital-card__bar">
+                                        <div class="vital-card__fill" style="width:68%"></div>
+                                    </div>
+                                    <span class="vital-card__range">Normal: 60–120 bpm</span>
+                                </div>
+                                <div class="vital-card">
+                                    <span class="vital-card__label">Temperature</span>
+                                    <span class="vital-card__value">101.2 <small>°F</small></span>
+                                    <div class="vital-card__bar">
+                                        <div class="vital-card__fill vital-card__fill--warm" style="width:55%"></div>
+                                    </div>
+                                    <span class="vital-card__range">Normal: 99.5–102.5 °F</span>
+                                </div>
+                                <div class="vital-card">
+                                    <span class="vital-card__label">Activity Level</span>
+                                    <span class="vital-card__value">High</span>
+                                    <div class="vital-card__bar">
+                                        <div class="vital-card__fill vital-card__fill--active" style="width:85%"></div>
+                                    </div>
+                                    <span class="vital-card__range">2.4 km walked today</span>
+                                </div>
+                                <div class="vital-card">
+                                    <span class="vital-card__label">Caloric Need</span>
+                                    <span class="vital-card__value">920 <small>kcal</small></span>
+                                    <div class="vital-card__bar">
+                                        <div class="vital-card__fill vital-card__fill--calories" style="width:72%">
+                                        </div>
+                                    </div>
+                                    <span class="vital-card__range">Fed: 660 / 920 kcal</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-alerts">
+                            <h4 class="dashboard-alerts__title">⚡ Smart Alerts</h4>
+                            <div class="alert-item alert-item--info">
+                                <span class="alert-item__icon">ℹ️</span>
+                                <div>
+                                    <strong>Activity Spike Detected</strong>
+                                    <p>Buddy's afternoon activity is 40% above baseline. Adjusting evening portion to
+                                        310 kcal.</p>
+                                </div>
+                                <span class="alert-item__time">12 min ago</span>
+                            </div>
+                            <div class="alert-item alert-item--warning">
+                                <span class="alert-item__icon">⚠️</span>
+                                <div>
+                                    <strong>Resting Heart Rate Trending Up</strong>
+                                    <p>3-day average: 88 bpm (was 78 bpm). Consider a vet check if trend continues.</p>
+                                </div>
+                                <span class="alert-item__time">2 hrs ago</span>
+                            </div>
+                            <div class="alert-item alert-item--success">
+                                <span class="alert-item__icon">✅</span>
+                                <div>
+                                    <strong>Telehealth Ready</strong>
+                                    <p>Buddy's health report is packaged and ready to share with Dr. Sharma via one tap.
+                                    </p>
+                                </div>
+                                <span class="alert-item__time">Today</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== VET PARTNER SECTION ========== -->
+        <section class="partner-section" id="partner">
+            <div class="container">
+                <div class="partner__grid">
+                    <div class="partner__content">
+                        <p class="section-eyebrow">For Veterinarians</p>
+                        <h2 class="section-title">Partner with us.</h2>
+                        <p class="partner__desc">
+                            Access real-time patient vitals, receive anomaly-triggered triage alerts,
+                            and conduct telehealth consultations — all powered by continuous biometric data
+                            instead of once-a-year check-ups.
+                        </p>
+                        <ul class="partner__perks">
+                            <li>📊 Continuous biometric data streams for each patient</li>
+                            <li>🚨 Automated anomaly alerts sent to your dashboard</li>
+                            <li>📹 Integrated telehealth with rich health context</li>
+                            <li>📋 Auto-generated health reports for every visit</li>
+                        </ul>
+                        <a href="#waitlist" class="btn btn--primary btn--lg">Join as a Vet Partner</a>
+                    </div>
+                    <div class="partner__visual fade-in">
+                        <div class="partner-graphic">
+                            <div class="partner-graphic__circle">
+                                <span>🩺</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== ROADMAP (Transparency) ========== -->
+        <section class="roadmap" id="roadmap">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-eyebrow">The Journey</p>
+                    <h2 class="section-title">Our Roadmap</h2>
+                    <p class="section-subtitle">Transparent progress from lab to your living room.</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline__line"></div>
+                    <div class="timeline__item timeline__item--done fade-in">
+                        <div class="timeline__dot"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__date">Q1 2026</span>
+                            <h4>Lab Prototype</h4>
+                            <p>Working hardware prototype with integrated sensor suite and feeder mechanism completed.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="timeline__item timeline__item--done fade-in">
+                        <div class="timeline__dot"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__date">Q2 2026</span>
+                            <h4>Patent Publication</h4>
+                            <p>Indian Patent Application (202641027315 A) published in the Official Journal — Issue
+                                12/2026.</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item timeline__item--active fade-in">
+                        <div class="timeline__dot"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__date">Q3 2026</span>
+                            <h4>Beta Testing</h4>
+                            <p>Closed beta with select pet parents and veterinary partners. Refining the AI feedback
+                                model.</p>
+                        </div>
+                    </div>
+                    <div class="timeline__item fade-in">
+                        <div class="timeline__dot"></div>
+                        <div class="timeline__content">
+                            <span class="timeline__date">Q1 2027</span>
+                            <h4>Public Launch</h4>
+                            <p>Wiggly Woosh ecosystem available to pet parents across India. Nationwide vet partner
+                                network live.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== WAITLIST / CTA SECTION ========== -->
+        <section class="cta-section" id="waitlist">
+            <div class="container">
+                <div class="cta-section__inner">
+                    <h2 class="cta-section__title">Be the first to experience<br><span class="text-gradient">the future
+                            of pet care.</span></h2>
+                    <p class="cta-section__subtitle">
+                        Join our waitlist and get early access, exclusive updates, and founding-member pricing.
+                    </p>
+                    <form class="waitlist-form" id="waitlistForm" action="#" method="POST">
+                        <div class="waitlist-form__row">
+                            <input type="text" name="name" placeholder="Your Name" required class="waitlist-form__input"
+                                aria-label="Your Name">
+                            <input type="email" name="email" placeholder="Your Email" required
+                                class="waitlist-form__input" aria-label="Your Email">
+                        </div>
+                        <div class="waitlist-form__row">
+                            <select name="role" class="waitlist-form__input" aria-label="I am a...">
+                                <option value="" disabled selected>I am a...</option>
+                                <option value="pet-parent">Pet Parent</option>
+                                <option value="veterinarian">Veterinarian</option>
+                                <option value="investor">Investor / Partner</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <button type="submit" class="btn btn--accent btn--lg waitlist-form__btn">Join the Waitlist
+                                🚀</button>
+                        </div>
+                    </form>
+                    <p class="waitlist-form__note">No spam. Only major updates. Unsubscribe anytime.</p>
+                </div>
+            </div>
+        </section>
+
     </main>
-    
-    <footer>
-        <!-- Include footer section -->
-        <div id="footer"></div>
+
+    <!-- ========== FOOTER (Trust & Authority) ========== -->
+    <footer class="site-footer" id="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <span class="navbar__logo-text">
+                        <span class="logo-wiggly">Wiggly</span>
+                        <span class="logo-woosh">Woosh</span>
+                    </span>
+                    <p class="footer__tagline">The first self-correcting health loop for pets.</p>
+                </div>
+                <div class="footer__links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#ecosystem">Ecosystem</a></li>
+                        <li><a href="#the-tech">The Tech</a></li>
+                        <li><a href="#why-data">Why Data?</a></li>
+                        <li><a href="#roadmap">Roadmap</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4>Legal & IP</h4>
+                    <ul>
+                        <li><a href="#">Patent: 202641027315 A</a></li>
+                        <li><a href="#">IP Journal — Issue 12/2026</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4>Connect</h4>
+                    <ul>
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="mailto:hello@wigglywoosh.com">hello@wigglywoosh.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>© 2026 Wiggly Woosh™. All rights reserved.</p>
+                <p>Built with ❤️ in Bengaluru, India.</p>
+            </div>
+        </div>
     </footer>
 
     <script src="src/js/main.js"></script>
-    <script src="src/js/smooth-scroll.js"></script>
-    <script src="src/js/intersection-observer.js"></script>
-    <script src="src/js/accordion.js"></script>
-    <script src="src/js/carousel.js"></script>
-    <script src="src/js/navbar.js"></script>
-    <script src="src/js/lazy-load.js"></script>
 </body>
+
 </html>

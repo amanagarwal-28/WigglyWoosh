@@ -1,0 +1,82 @@
+/* ========================================
+   FADE-IN ON SCROLL
+   ======================================== */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fade-in.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger siblings */
+.fade-in:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.fade-in:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.fade-in:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.fade-in:nth-child(4) {
+    transition-delay: 0.3s;
+}
+
+.fade-in:nth-child(5) {
+    transition-delay: 0.4s;
+}
+
+/* ========================================
+   DASHBOARD VITALS BAR ANIMATION
+   ======================================== */
+.dashboard-preview.is-visible .vital-card__fill {
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
+}
+
+/* ========================================
+   SUBTLE HOVER LIFT (utility)
+   ======================================== */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ========================================
+   PREFERS REDUCED MOTION
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    .fade-in {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .connector-arrow {
+        animation: none;
+    }
+
+    .timeline__item--active .timeline__dot {
+        animation: none;
+    }
+
+    .partner-graphic::before {
+        animation: none;
+    }
+
+    * {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}

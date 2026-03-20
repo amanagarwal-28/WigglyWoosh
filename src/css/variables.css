@@ -1,0 +1,79 @@
+:root {
+    /* === Brand Colors — Pink / Turquoise / Lavender === */
+    --color-primary: #2EC4B6;
+    /* Turquoise */
+    --color-primary-dark: #20A99D;
+    --color-primary-light: #E6FAF8;
+    --color-accent: #F2A7B3;
+    /* Light Pink / Rose */
+    --color-accent-dark: #E0899A;
+    --color-accent-light: #FFF0F3;
+
+    /* === Extended Palette === */
+    --color-lavender: #B8A9E8;
+    /* Soft Lavender */
+    --color-lavender-light: #F3F0FB;
+    --color-peach: #FFD6C9;
+    /* Warm Peach */
+    --color-mint: #A8E6CF;
+    /* Soft Mint */
+    --color-sky: #89CFF0;
+    /* Sky Blue */
+
+    /* === Neutrals === */
+    --color-bg: #FAFAFA;
+    --color-white: #FFFFFF;
+    --color-text: #2D2B3D;
+    /* Deep purple-grey for readability */
+    --color-text-light: #7B7893;
+    /* Muted lavender-grey */
+    --color-border: #E8E5F0;
+    --color-border-light: #F5F3FA;
+
+    /* === Status === */
+    --color-success: #2EC4B6;
+    --color-warning: #FFB347;
+    --color-danger: #F27089;
+    --color-info: #89CFF0;
+
+    /* === Typography === */
+    --font-family: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-md: 1.125rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-2xl: 2rem;
+    --font-size-3xl: 2.5rem;
+    --font-size-4xl: 3.25rem;
+    --font-size-5xl: 4rem;
+
+    /* === Spacing === */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+    --space-4xl: 96px;
+    --space-5xl: 128px;
+
+    /* === Radius === */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 50px;
+
+    /* === Shadows (softer, warmer) === */
+    --shadow-sm: 0 1px 4px rgba(184, 169, 232, 0.08);
+    --shadow-md: 0 4px 16px rgba(184, 169, 232, 0.1);
+    --shadow-lg: 0 8px 32px rgba(184, 169, 232, 0.12);
+    --shadow-xl: 0 16px 48px rgba(184, 169, 232, 0.15);
+
+    /* === Layout === */
+    --max-width: 1280px;
+    --header-height: 72px;
+}
