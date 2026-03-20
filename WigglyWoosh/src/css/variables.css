@@ -1,0 +1,19 @@
+:root {
+    --vetic-green: #4CAF50; /* Vetic Green */
+    --supertails-orange: #FF9800; /* Supertails Orange */
+    --supertails-yellow: #FFEB3B; /* Supertails Yellow */
+    
+    --font-primary: 'Poppins', sans-serif; /* Primary font */
+    --font-secondary: 'Montserrat', sans-serif; /* Secondary font */
+    
+    --text-color: #333333; /* Default text color */
+    --background-color: #FFFFFF; /* Default background color */
+    --header-background: #F5F5F5; /* Header background color */
+    --footer-background: #F1F1F1; /* Footer background color */
+    
+    --button-background: var(--supertails-orange); /* Button background color */
+    --button-text-color: #FFFFFF; /* Button text color */
+    
+    --link-color: var(--vetic-green); /* Link color */
+    --link-hover-color: var(--supertails-orange); /* Link hover color */
+}

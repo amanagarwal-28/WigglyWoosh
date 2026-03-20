@@ -1,0 +1,58 @@
+body {
+    background-color: #f9f9f9; /* Light background for a premium feel */
+    font-family: 'Poppins', sans-serif; /* Using a modern, approachable font */
+}
+
+.testimonials-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.testimonials-title {
+    font-size: 2.5rem;
+    color: #333; /* Darker text for contrast */
+    margin-bottom: 40px;
+}
+
+.testimonial {
+    background-color: #fff; /* White background for testimonials */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 600px; /* Limit width for readability */
+}
+
+.testimonial-text {
+    font-size: 1.2rem;
+    color: #555; /* Softer text color */
+    margin-bottom: 20px;
+}
+
+.testimonial-author {
+    font-weight: bold;
+    color: #333; /* Darker color for author name */
+}
+
+.testimonial-role {
+    font-style: italic;
+    color: #777; /* Lighter color for role */
+}
+
+.testimonial-image {
+    border-radius: 50%; /* Circular image for a personal touch */
+    width: 80px; /* Fixed size for consistency */
+    height: 80px; /* Fixed size for consistency */
+    object-fit: cover; /* Ensure image covers the area */
+    margin-bottom: 15px;
+}
+
+.testimonials-carousel {
+    display: flex;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Enable snap scrolling */
+}
+
+.testimonial {
+    scroll-snap-align: start; /* Align testimonials to the start */
+}

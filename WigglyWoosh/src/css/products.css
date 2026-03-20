@@ -1,0 +1,79 @@
+/ WigglyWoosh / WigglyWoosh / src / css / products.css
+
+/* Products Section Styles */
+
+.products-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    background-color: var(--light-background);
+}
+
+.products-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.products-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    width: 100%;
+}
+
+.product-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+}
+
+.product-info {
+    padding: 20px;
+    text-align: center;
+}
+
+.product-title {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin: 10px 0;
+}
+
+.product-description {
+    font-size: 1rem;
+    color: var(--secondary-text);
+    margin-bottom: 15px;
+}
+
+.product-benefits {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.benefit-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.benefit-text {
+    font-size: 0.9rem;
+    color: var(--secondary-text);
+    margin: 5px 0;
+}
