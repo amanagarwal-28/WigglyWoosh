@@ -141,13 +141,23 @@
         waitlistForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(waitlistForm);
-            const data = Object.fromEntries(formData);
-            console.log('Waitlist submission:', data);
+            const name = formData.get('name') || '';
+            const email = formData.get('email') || '';
+            const role = formData.get('role') || '';
 
-            // Replace with actual API call
+            const subject = encodeURIComponent('Waitlist Enquiry - ' + name);
+            const body = encodeURIComponent(
+                'New Waitlist Enquiry\n\n' +
+                'Name: ' + name + '\n' +
+                'Email: ' + email + '\n' +
+                'Role: ' + role + '\n'
+            );
+
+            window.location.href = 'mailto:admin@wigglywoosh.co.in?subject=' + subject + '&body=' + body;
+
             const btn = waitlistForm.querySelector('.waitlist-form__btn');
             const originalText = btn.textContent;
-            btn.textContent = '✓ You\'re on the list!';
+            btn.textContent = '✓ Opening your email client...';
             btn.style.background = '#10B981';
             btn.disabled = true;
 
