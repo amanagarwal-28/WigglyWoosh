@@ -808,6 +808,12 @@ ol {
     display: inline-block;
 }
 
+.eco-card__icon img {
+    width: 56px;
+    height: 56px;
+    display: block;
+}
+
 .eco-card__title {
     font-size: var(--font-size-lg);
     font-weight: 700;
@@ -875,6 +881,13 @@ ol {
 .step-card__icon {
     font-size: 2rem;
     margin-bottom: var(--space-md);
+}
+
+.step-card__icon img {
+    width: 48px;
+    height: 48px;
+    display: block;
+    margin: 0 auto;
 }
 
 .step-card__title {
@@ -1019,6 +1032,11 @@ ol {
     transition: transform 0.3s ease;
 }
 
+.product-placeholder img {
+    width: 100px;
+    height: 100px;
+}
+
 .product-card:hover .product-placeholder {
     transform: scale(1.05);
 }
@@ -1065,6 +1083,13 @@ ol {
     flex-shrink: 0;
     width: 28px;
     text-align: center;
+}
+
+.feature-icon img {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* ========================================
@@ -1257,6 +1282,14 @@ ol {
     margin-bottom: var(--space-md);
 }
 
+.dashboard-alerts__title img {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
 .alert-item {
     display: flex;
     gap: var(--space-md);
@@ -1294,6 +1327,12 @@ ol {
     font-size: 1.2rem;
     flex-shrink: 0;
     margin-top: 2px;
+}
+
+.alert-item__icon img {
+    width: 24px;
+    height: 24px;
+    display: block;
 }
 
 .alert-item strong {
@@ -1373,6 +1412,15 @@ ol {
     border-radius: var(--radius-sm);
     transition: transform 0.2s ease;
     border-left: 3px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.partner__perks li img {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
 }
 
 .partner__perks li:hover {
@@ -1400,6 +1448,11 @@ ol {
     box-shadow: var(--shadow-lg);
     position: relative;
     z-index: 1;
+}
+
+.partner-graphic__circle img {
+    width: 100px;
+    height: 100px;
 }
 
 .partner-graphic::before {
@@ -1618,6 +1671,14 @@ ol {
     border: none;
 }
 
+.waitlist-form__btn img {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+}
+
 .waitlist-form__note {
     font-size: var(--font-size-xs);
     color: rgba(255, 255, 255, 0.4);
@@ -1686,6 +1747,14 @@ ol {
     align-items: center;
     font-size: var(--font-size-xs);
     color: rgba(255, 255, 255, 0.35);
+}
+
+.footer__bottom img {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 2px;
 }
 
 /* ========================================
