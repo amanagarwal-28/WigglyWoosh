@@ -1992,6 +1992,61 @@ ol {
     margin: 0 2px;
 }
 
+/* --- Trusted By logo bar --- */
+.footer__trusted {
+    text-align: center;
+    padding: var(--space-2xl) 0;
+    margin-bottom: var(--space-xl);
+    border-bottom: 1px solid rgba(184, 169, 232, 0.1);
+}
+
+.footer__trusted-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: var(--space-lg);
+}
+
+.footer__trusted-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3xl);
+    margin-bottom: var(--space-lg);
+}
+
+.footer__trusted-logo {
+    display: inline-flex;
+    align-items: center;
+    transition: opacity 0.3s ease, filter 0.3s ease;
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+
+.footer__trusted-logo:hover {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+.footer__trusted-logo img {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.footer__legal {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.3);
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
 /* ========================================
    MOBILE STICKY CTA
    ======================================== */
