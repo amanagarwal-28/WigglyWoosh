@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="g" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f0f4f8"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1e3a5f" flood-opacity="0.12"/></filter>
+    <filter id="gl"><feGaussianBlur stdDeviation="1.5" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <circle cx="24" cy="24" r="18" fill="url(#g)" filter="url(#s)"/>
+  <!-- Bowl shape -->
+  <path d="M14 22 C14 22 15 30 24 30 C33 30 34 22 34 22" fill="none" stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" filter="url(#gl)"/>
+  <!-- Food portions (volumetric blocks) -->
+  <rect x="17" y="18" width="4" height="4" rx="0.8" fill="#3b82f6" opacity="0.3"/>
+  <rect x="22" y="16" width="4" height="6" rx="0.8" fill="#3b82f6" opacity="0.5"/>
+  <rect x="27" y="17" width="4" height="5" rx="0.8" fill="#3b82f6" opacity="0.4"/>
+  <!-- Measurement lines -->
+  <line x1="12" y1="19" x2="12" y2="28" stroke="#60a5fa" stroke-width="0.8" opacity="0.5"/>
+  <line x1="11" y1="19" x2="13" y2="19" stroke="#60a5fa" stroke-width="0.8" opacity="0.5"/>
+  <line x1="11" y1="23.5" x2="13" y2="23.5" stroke="#60a5fa" stroke-width="0.8" opacity="0.5"/>
+  <line x1="11" y1="28" x2="13" y2="28" stroke="#60a5fa" stroke-width="0.8" opacity="0.5"/>
+  <!-- Calorie label -->
+  <text x="24" y="36" text-anchor="middle" fill="#3b82f6" font-size="5" font-weight="600" font-family="sans-serif" opacity="0.7">kcal</text>
+</svg>

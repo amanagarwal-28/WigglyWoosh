@@ -1266,7 +1266,7 @@ ol {
 
 .products__grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: var(--space-xl);
 }
 
@@ -1328,6 +1328,202 @@ ol {
 
 .product-card:nth-child(2) .product-card__image {
     background: rgba(129, 140, 248, 0.06);
+}
+
+/* --- Hub card (3rd product) --- */
+.product-card__image--hub {
+    background: rgba(56, 189, 248, 0.06);
+}
+
+.product-card__badge--hub {
+    background: linear-gradient(135deg, #3B82F6, #38bdf8);
+}
+
+.product-placeholder--hub {
+    border-color: rgba(56, 189, 248, 0.12);
+}
+
+.product-placeholder--photo {
+    width: auto;
+    height: auto;
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: var(--radius-lg);
+    background: transparent;
+    border: none;
+}
+
+.product-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+}
+
+.product-card__subtitle {
+    font-size: var(--font-size-sm);
+    color: #60a5fa;
+    margin-bottom: var(--space-lg);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+.product-card__btn {
+    display: inline-block;
+    margin-top: var(--space-lg);
+    padding: 12px 28px;
+    background: var(--color-primary);
+    color: #FFFFFF;
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    text-align: center;
+    letter-spacing: 0.02em;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.product-card__btn:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+}
+
+/* --- Comparison Table --- */
+.comparison {
+    margin-top: var(--space-4xl);
+}
+
+.comparison__title {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    color: #F5F5F5;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin-bottom: var(--space-xl);
+}
+
+.comparison__wrapper {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #1E1E1E;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.comparison__table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.comparison__table thead th {
+    padding: 20px 24px;
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    color: #F5F5F5;
+    letter-spacing: -0.02em;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+.comparison__feature-col {
+    text-align: left !important;
+    color: #94A3B8 !important;
+    font-weight: 600 !important;
+    width: 36%;
+}
+
+.comparison__table tbody td {
+    padding: 16px 24px;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    color: #94A3B8;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.comparison__table tbody td:first-child {
+    text-align: left;
+    color: #F5F5F5;
+    font-weight: 600;
+}
+
+.comparison__table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.comparison__table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.comparison__table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.04);
+}
+
+/* Checkmark & dash */
+.comparison__check {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.comparison__dash {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: var(--font-size-lg);
+    font-weight: 300;
+}
+
+/* Best Value column highlight */
+.comparison__highlight {
+    position: relative;
+    background: rgba(59, 130, 246, 0.04);
+}
+
+thead .comparison__highlight {
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.comparison__highlight::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    box-shadow: inset 1px 0 0 rgba(59, 130, 246, 0.15),
+        inset -1px 0 0 rgba(59, 130, 246, 0.15);
+}
+
+thead .comparison__highlight::before {
+    box-shadow: inset 1px 0 0 rgba(59, 130, 246, 0.15),
+        inset -1px 0 0 rgba(59, 130, 246, 0.15),
+        inset 0 1px 0 rgba(59, 130, 246, 0.15);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+tbody tr:last-child .comparison__highlight::before {
+    box-shadow: inset 1px 0 0 rgba(59, 130, 246, 0.15),
+        inset -1px 0 0 rgba(59, 130, 246, 0.15),
+        inset 0 -1px 0 rgba(59, 130, 246, 0.15);
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.comparison__best-badge {
+    display: block;
+    margin: 0 auto 6px;
+    width: fit-content;
+    background: linear-gradient(135deg, #3B82F6, #60a5fa);
+    color: #FFFFFF;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1;
 }
 
 .product-placeholder {
@@ -2180,9 +2376,7 @@ ol {
     }
 
     .products__grid {
-        grid-template-columns: 1fr;
-        max-width: 560px;
-        margin: 0 auto;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .dashboard-preview__body {
@@ -2295,6 +2489,12 @@ ol {
     .ecosystem__grid {
         grid-template-columns: 1fr;
         max-width: 420px;
+        margin: 0 auto;
+    }
+
+    .products__grid {
+        grid-template-columns: 1fr;
+        max-width: 560px;
         margin: 0 auto;
     }
 
@@ -2746,6 +2946,66 @@ ol {
 [data-theme="light"] .product-card__features li {
     color: #475569;
     border-bottom-color: #F1F5F9;
+}
+
+[data-theme="light"] .product-card__image--hub {
+    background: rgba(56, 189, 248, 0.04);
+}
+
+[data-theme="light"] .product-card__subtitle {
+    color: #3B82F6;
+}
+
+[data-theme="light"] .product-card__btn {
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15);
+}
+
+/* --- Comparison Table (light) --- */
+[data-theme="light"] .comparison__title {
+    color: #1E293B;
+}
+
+[data-theme="light"] .comparison__wrapper {
+    background: #FFFFFF;
+    border-color: #E2E8F0;
+}
+
+[data-theme="light"] .comparison__table thead th {
+    color: #1E293B;
+    border-bottom-color: #E2E8F0;
+}
+
+[data-theme="light"] .comparison__feature-col {
+    color: #64748B !important;
+}
+
+[data-theme="light"] .comparison__table tbody td {
+    color: #64748B;
+    border-bottom-color: #F1F5F9;
+}
+
+[data-theme="light"] .comparison__table tbody td:first-child {
+    color: #1E293B;
+}
+
+[data-theme="light"] .comparison__table tbody tr:nth-child(even) {
+    background: #F8F9FC;
+}
+
+[data-theme="light"] .comparison__table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.03);
+}
+
+[data-theme="light"] .comparison__dash {
+    color: #CBD5E1;
+}
+
+[data-theme="light"] .comparison__highlight {
+    background: rgba(59, 130, 246, 0.03);
+}
+
+[data-theme="light"] thead .comparison__highlight {
+    background: rgba(59, 130, 246, 0.06);
 }
 
 /* --- Proactive Care --- */
