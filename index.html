@@ -175,57 +175,81 @@
             </div>
         </section>
 
-        <!-- ========== THE METABOLIC FEEDBACK LOOP (How It Works) ========== -->
-        <section class="how-it-works" id="the-tech">
-            <div class="container">
-                <div class="section-header">
-                    <p class="section-eyebrow">The Tech Core</p>
-                    <h2 class="section-title">The Metabolic Feedback Loop</h2>
-                    <p class="section-subtitle">
-                        A self-correcting cycle that continuously adapts to your pet's real-time health data.
-                    </p>
+        <!-- ========== HOW IT WORKS — GLASSMORPHISM FLOW ========== -->
+        <section class="hiw" id="the-tech">
+            <div class="hiw__container">
+                <p class="hiw__eyebrow">How It Works</p>
+                <h2 class="hiw__title">The Metabolic Feedback Loop</h2>
+                <p class="hiw__subtitle">A self-correcting cycle that continuously adapts to your pet's real-time health
+                    data.</p>
+
+                <div class="hiw__flow">
+                    <!-- Step 1 -->
+                    <div class="hiw__card">
+                        <span class="hiw__step-num">01</span>
+                        <div class="hiw__icon">
+                            <img src="images/icon-step-sense.svg" alt="" width="48" height="48">
+                        </div>
+                        <h3 class="hiw__card-title">Sense</h3>
+                        <p class="hiw__card-desc">The Smart Brooch captures heart rate, temperature, and movement data
+                            around the clock.</p>
+                    </div>
+
+                    <!-- Connector 1→2 -->
+                    <div class="hiw__connector" aria-hidden="true">
+                        <svg class="hiw__connector-line" viewBox="0 0 80 2" preserveAspectRatio="none">
+                            <line x1="0" y1="1" x2="80" y2="1" stroke="#3b82f6" stroke-width="1.5"
+                                stroke-dasharray="6 4" />
+                        </svg>
+                        <svg class="hiw__connector-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="hiw__card">
+                        <span class="hiw__step-num">02</span>
+                        <div class="hiw__icon">
+                            <img src="images/icon-step-analyze.svg" alt="" width="48" height="48">
+                        </div>
+                        <h3 class="hiw__card-title">Analyze</h3>
+                        <p class="hiw__card-desc">Our AI engine calculates metabolic energy expenditure and converts it
+                            into precise nutritional needs.</p>
+                    </div>
+
+                    <!-- Connector 2→3 -->
+                    <div class="hiw__connector" aria-hidden="true">
+                        <svg class="hiw__connector-line" viewBox="0 0 80 2" preserveAspectRatio="none">
+                            <line x1="0" y1="1" x2="80" y2="1" stroke="#3b82f6" stroke-width="1.5"
+                                stroke-dasharray="6 4" />
+                        </svg>
+                        <svg class="hiw__connector-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none"
+                            stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6" />
+                        </svg>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="hiw__card">
+                        <span class="hiw__step-num">03</span>
+                        <div class="hiw__icon">
+                            <img src="images/icon-step-adjust.svg" alt="" width="48" height="48">
+                        </div>
+                        <h3 class="hiw__card-title">Adjust</h3>
+                        <p class="hiw__card-desc">The Smart Feeder dispenses the exact portion your pet needs —
+                            automatically and hygienically.</p>
+                    </div>
                 </div>
-                <div class="steps-scroller">
-                    <div class="step-card fade-in">
-                        <div class="step-card__number">01</div>
-                        <div class="step-card__icon"><img src="images/icon-smart-brooch.svg" alt="Track"
-                                class="icon-3d icon-3d--sm"></div>
-                        <h3 class="step-card__title">Track</h3>
-                        <p class="step-card__desc">
-                            The Smart Brooch continuously monitors heart rate, body temperature, and activity levels
-                            throughout the day.
-                        </p>
-                    </div>
-                    <div class="step-card__connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-arrow">→</div>
-                    </div>
-                    <div class="step-card fade-in">
-                        <div class="step-card__number">02</div>
-                        <div class="step-card__icon"><img src="images/icon-ai-engine.svg" alt="Calculate"
-                                class="icon-3d icon-3d--sm"></div>
-                        <h3 class="step-card__title">Calculate</h3>
-                        <p class="step-card__desc">
-                            AI analyzes the biometric data to calculate real-time energy expenditure and nutritional
-                            needs using metabolic modeling.
-                        </p>
-                    </div>
-                    <div class="step-card__connector">
-                        <div class="connector-line"></div>
-                        <div class="connector-arrow">→</div>
-                    </div>
-                    <div class="step-card fade-in">
-                        <div class="step-card__number">03</div>
-                        <div class="step-card__icon"><img src="images/icon-smart-feeder.svg" alt="Dispense"
-                                class="icon-3d icon-3d--sm"></div>
-                        <h3 class="step-card__title">Dispense</h3>
-                        <p class="step-card__desc">
-                            The Smart Feeder receives instructions and dispenses the exact required portion —
-                            automatically and hygienically.
-                        </p>
-                    </div>
+
+                <!-- Patent badge -->
+                <div class="hiw__badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    Patented Metabolic Technology
                 </div>
-                <p class="steps-patent">Publication No. <strong>202641027315 A</strong></p>
             </div>
         </section>
 

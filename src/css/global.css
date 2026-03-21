@@ -827,125 +827,199 @@ ol {
 }
 
 /* ========================================
-   HOW IT WORKS (STEPS)
+   HOW IT WORKS — GLASSMORPHISM
    ======================================== */
-.how-it-works {
+.hiw {
     padding: var(--space-5xl) 0;
-    background: var(--color-white);
+    background: linear-gradient(170deg, #0f0f1a 0%, #1a1a2e 50%, #0f0f1a 100%);
+    position: relative;
+    overflow: hidden;
 }
 
-.steps-scroller {
+.hiw::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: -20%;
+    width: 60%;
+    height: 80%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hiw::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    right: -15%;
+    width: 50%;
+    height: 70%;
+    background: radial-gradient(circle, rgba(46, 196, 182, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.hiw__container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.hiw__eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #3b82f6;
+    margin-bottom: var(--space-md);
+}
+
+.hiw__title {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--font-size-3xl);
+    font-weight: 800;
+    color: #f0f0f5;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+}
+
+.hiw__subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--font-size-base);
+    color: rgba(240, 240, 245, 0.55);
+    max-width: 540px;
+    margin: 0 auto var(--space-3xl);
+    line-height: 1.7;
+}
+
+/* --- Flow layout (cards + connectors) --- */
+.hiw__flow {
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
     gap: 0;
-    overflow-x: auto;
-    padding: var(--space-lg) 0;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
 }
 
-.steps-scroller::-webkit-scrollbar {
-    display: none;
-}
-
-.step-card {
-    background: var(--color-bg);
-    border-radius: var(--radius-lg);
+/* --- Glass card --- */
+.hiw__card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
     padding: var(--space-2xl) var(--space-xl);
     text-align: center;
-    min-width: 280px;
-    max-width: 320px;
+    width: 280px;
     flex-shrink: 0;
-    border: 1px solid var(--color-border-light);
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
 }
 
-.step-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
+.hiw__card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(59, 130, 246, 0.25);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1), 0 0 0 1px rgba(59, 130, 246, 0.08);
 }
 
-.step-card__number {
-    font-size: var(--font-size-4xl);
+.hiw__step-num {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.75rem;
     font-weight: 900;
-    background: linear-gradient(135deg, var(--color-primary-light), rgba(184, 169, 232, 0.3));
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(46, 196, 182, 0.15));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     line-height: 1;
     margin-bottom: var(--space-sm);
+    display: block;
 }
 
-.step-card__icon {
-    font-size: 2rem;
+.hiw__icon {
     margin-bottom: var(--space-md);
 }
 
-.step-card__icon img {
+.hiw__icon img {
     width: 48px;
     height: 48px;
     display: block;
     margin: 0 auto;
+    opacity: 0.9;
 }
 
-.step-card__title {
+.hiw__card-title {
+    font-family: 'Inter', sans-serif;
     font-size: var(--font-size-lg);
     font-weight: 700;
+    color: #f0f0f5;
     margin-bottom: var(--space-sm);
 }
 
-.step-card__desc {
+.hiw__card-desc {
+    font-family: 'Inter', sans-serif;
     font-size: var(--font-size-sm);
-    color: var(--color-text-light);
+    color: rgba(240, 240, 245, 0.5);
     line-height: 1.7;
 }
 
-.step-card__connector {
+/* --- Dashed connectors --- */
+.hiw__connector {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0 var(--space-md);
+    gap: 4px;
+    padding: 0 var(--space-sm);
     flex-shrink: 0;
 }
 
-.connector-arrow {
-    font-size: 1.8rem;
-    color: var(--color-accent);
-    font-weight: 700;
-    animation: pulseArrow 2s ease-in-out infinite;
+.hiw__connector-line {
+    width: 60px;
+    height: 2px;
+    display: block;
 }
 
-.connector-line {
-    display: none;
+.hiw__connector-line line {
+    animation: dashFlow 1.5s linear infinite;
 }
 
-@keyframes pulseArrow {
-
-    0%,
-    100% {
-        opacity: 0.4;
-        transform: translateX(0);
+@keyframes dashFlow {
+    from {
+        stroke-dashoffset: 20;
     }
 
-    50% {
-        opacity: 1;
-        transform: translateX(4px);
+    to {
+        stroke-dashoffset: 0;
     }
 }
 
-.steps-patent {
-    text-align: center;
-    margin-top: var(--space-2xl);
-    font-size: var(--font-size-sm);
-    color: var(--color-text-light);
-    padding: var(--space-sm) var(--space-md);
-    background: var(--color-lavender-light);
+.hiw__connector-arrow {
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+/* --- Patent badge --- */
+.hiw__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-3xl);
+    padding: 8px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-full);
-    display: inline-block;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-family: 'Inter', sans-serif;
+    font-size: var(--font-size-xs);
+    font-weight: 500;
+    color: rgba(240, 240, 245, 0.6);
+    letter-spacing: 0.04em;
+}
+
+.hiw__badge svg {
+    opacity: 0.5;
+    flex-shrink: 0;
 }
 
 /* ========================================
@@ -1917,18 +1991,17 @@ ol {
         margin: 0 auto;
     }
 
-    .steps-scroller {
+    .hiw__flow {
         flex-direction: column;
-        align-items: center;
+        gap: 0;
     }
 
-    .step-card {
-        min-width: unset;
-        max-width: 100%;
+    .hiw__card {
         width: 100%;
+        max-width: 400px;
     }
 
-    .step-card__connector {
+    .hiw__connector {
         transform: rotate(90deg);
         padding: var(--space-sm) 0;
     }
