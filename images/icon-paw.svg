@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <defs>
+    <linearGradient id="g" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f0f4f8"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <filter id="gl"><feGaussianBlur stdDeviation="0.8" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <!-- Paw pad - main -->
+  <ellipse cx="12" cy="15" rx="5.5" ry="4.5" fill="url(#g)" stroke="#3b82f6" stroke-width="0.8" filter="url(#gl)"/>
+  <!-- Toe pads -->
+  <ellipse cx="6.5" cy="9" rx="2.2" ry="2.8" fill="url(#g)" stroke="#3b82f6" stroke-width="0.7" transform="rotate(-10 6.5 9)"/>
+  <ellipse cx="10" cy="7" rx="2" ry="2.6" fill="url(#g)" stroke="#3b82f6" stroke-width="0.7"/>
+  <ellipse cx="14" cy="7" rx="2" ry="2.6" fill="url(#g)" stroke="#3b82f6" stroke-width="0.7"/>
+  <ellipse cx="17.5" cy="9" rx="2.2" ry="2.8" fill="url(#g)" stroke="#3b82f6" stroke-width="0.7" transform="rotate(10 17.5 9)"/>
+  <!-- Inner highlights -->
+  <ellipse cx="12" cy="14" rx="3" ry="2" fill="#3b82f6" opacity="0.15"/>
+</svg>

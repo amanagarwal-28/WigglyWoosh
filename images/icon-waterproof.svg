@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <linearGradient id="g" x1="8" y1="8" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f0f4f8"/>
+      <stop offset="100%" stop-color="#cbd5e1"/>
+    </linearGradient>
+    <filter id="s"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#1e3a5f" flood-opacity="0.12"/></filter>
+    <filter id="gl"><feGaussianBlur stdDeviation="1.5" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <circle cx="24" cy="24" r="18" fill="url(#g)" filter="url(#s)"/>
+  <!-- Water drop -->
+  <path d="M24,12 Q30,22 30,27 A6,6 0 0,1 18,27 Q18,22 24,12 Z" fill="none" stroke="#3b82f6" stroke-width="1.5" filter="url(#gl)"/>
+  <path d="M22,26 Q24,23 26,26" fill="#3b82f6" opacity="0.3"/>
+  <!-- IP67 shield -->
+  <path d="M24,30 L30,33 L30,37 Q30,40 24,42 Q18,40 18,37 L18,33 Z" fill="#3b82f6" opacity="0.2" stroke="#3b82f6" stroke-width="0.8"/>
+</svg>

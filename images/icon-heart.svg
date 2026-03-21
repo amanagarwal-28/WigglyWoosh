@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none">
+  <defs>
+    <linearGradient id="g" x1="3" y1="3" x2="17" y2="17" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fecdd3"/>
+      <stop offset="50%" stop-color="#fb7185"/>
+      <stop offset="100%" stop-color="#e11d48"/>
+    </linearGradient>
+    <filter id="gl"><feGaussianBlur stdDeviation="0.6" result="g"/><feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <!-- Heart shape -->
+  <path d="M10,17 C4,13 1,9 1,6.5 A4,4 0 0,1 5.5,3 Q8,3 10,5.5 Q12,3 14.5,3 A4,4 0 0,1 19,6.5 C19,9 16,13 10,17 Z"
+    fill="url(#g)" filter="url(#gl)"/>
+  <!-- Glass highlight -->
+  <ellipse cx="7" cy="7" rx="2.5" ry="1.8" fill="#ffffff" opacity="0.4" transform="rotate(-20 7 7)"/>
+</svg>

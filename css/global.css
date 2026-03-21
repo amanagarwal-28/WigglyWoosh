@@ -6,7 +6,12 @@ body {
     background-color: #f9f9f9;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin: 0;
     font-weight: 600;
 }
@@ -17,12 +22,14 @@ p {
 
 a {
     text-decoration: none;
-    color: #ff6f20; /* Supertails Orange */
+    color: #ff6f20;
+    /* Supertails Orange */
     transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #ff9f40; /* Lighter shade for hover effect */
+    color: #ff9f40;
+    /* Lighter shade for hover effect */
 }
 
 .container {
@@ -48,17 +55,90 @@ a:hover {
     padding: 20px 0;
 }
 
+/* ========== 3D Minimalist Tech Glass Icons ========== */
+.icon-3d {
+    width: 64px;
+    height: 64px;
+    display: block;
+    margin: 0 auto;
+}
+
+.icon-3d--lg {
+    width: 120px;
+    height: 120px;
+}
+
+.icon-3d--sm {
+    width: 56px;
+    height: 56px;
+}
+
+.icon-3d--xs {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.icon-3d--inline {
+    width: 22px;
+    height: 22px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.eco-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-placeholder .icon-3d--lg {
+    margin: 0 auto;
+}
+
+.icon-3d--alert {
+    width: 28px;
+    height: 28px;
+    display: block;
+}
+
+.icon-3d--btn {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 6px;
+}
+
+.alert-item__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
 .button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #ff6f20; /* Supertails Orange */
+    background-color: #ff6f20;
+    /* Supertails Orange */
     color: #fff;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
 .button:hover {
-    background-color: #ff9f40; /* Lighter shade for hover effect */
+    background-color: #ff9f40;
+    /* Lighter shade for hover effect */
 }
 
 .image-responsive {
