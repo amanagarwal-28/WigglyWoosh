@@ -1,40 +1,57 @@
 :root {
-    /* === Brand Colors — Pink / Turquoise / Lavender === */
-    --color-primary: #2EC4B6;
-    /* Turquoise */
-    --color-primary-dark: #20A99D;
-    --color-primary-light: #E6FAF8;
-    --color-accent: #F2A7B3;
-    /* Light Pink / Rose */
-    --color-accent-dark: #E0899A;
-    --color-accent-light: #FFF0F3;
+    /* === Brand Colors — Electric Blue accent === */
+    --color-primary: #3B82F6;
+    /* Electric Blue */
+    --color-primary-dark: #2563EB;
+    --color-primary-light: rgba(59, 130, 246, 0.1);
+    --color-accent: #3B82F6;
+    /* Unified accent */
+    --color-accent-dark: #2563EB;
+    --color-accent-light: rgba(59, 130, 246, 0.06);
 
     /* === Extended Palette === */
-    --color-lavender: #B8A9E8;
-    /* Soft Lavender */
-    --color-lavender-light: #F3F0FB;
-    --color-peach: #FFD6C9;
-    /* Warm Peach */
-    --color-mint: #A8E6CF;
-    /* Soft Mint */
-    --color-sky: #89CFF0;
+    --color-lavender: #818cf8;
+    /* Soft Indigo */
+    --color-lavender-light: rgba(129, 140, 248, 0.08);
+    --color-peach: #f97316;
+    /* Warm Orange */
+    --color-mint: #34d399;
+    /* Emerald */
+    --color-sky: #38bdf8;
     /* Sky Blue */
 
-    /* === Neutrals === */
-    --color-bg: #FAFAFA;
-    --color-white: #FFFFFF;
-    --color-text: #2D2B3D;
-    /* Deep purple-grey for readability */
-    --color-text-light: #7B7893;
-    /* Muted lavender-grey */
-    --color-border: #E8E5F0;
-    --color-border-light: #F5F3FA;
+    /* === Neutrals — Dark Theme === */
+    --color-bg: #121212;
+    /* Deep charcoal */
+    --color-white: #F5F5F5;
+    /* Off-white for text */
+    --color-text: #F5F5F5;
+    /* Headlines */
+    --color-text-light: #94A3B8;
+    /* Muted slate */
+    --color-border: rgba(255, 255, 255, 0.08);
+    --color-border-light: rgba(255, 255, 255, 0.05);
+
+    /* === Surface Colors === */
+    --color-surface: #1E1E1E;
+    /* Onyx cards */
+    --color-surface-raised: #252525;
+    /* Hover / elevated */
+    --color-bg-deep: #0a0a0a;
+    /* Footer / deep areas */
+
+    /* === Glass / Transparency === */
+    --color-header-bg: rgba(18, 18, 18, 0.8);
+    --color-glass-bg: rgba(30, 30, 30, 0.6);
+    --color-glass-subtle: rgba(255, 255, 255, 0.04);
+    --color-glass-border: rgba(255, 255, 255, 0.06);
+    --color-glass-border-md: rgba(255, 255, 255, 0.1);
 
     /* === Status === */
-    --color-success: #2EC4B6;
-    --color-warning: #FFB347;
-    --color-danger: #F27089;
-    --color-info: #89CFF0;
+    --color-success: #34d399;
+    --color-warning: #fbbf24;
+    --color-danger: #f87171;
+    --color-info: #38bdf8;
 
     /* === Typography === */
     --font-family: 'Poppins', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -67,13 +84,50 @@
     --radius-xl: 24px;
     --radius-full: 50px;
 
-    /* === Shadows (softer, warmer) === */
-    --shadow-sm: 0 1px 4px rgba(184, 169, 232, 0.08);
-    --shadow-md: 0 4px 16px rgba(184, 169, 232, 0.1);
-    --shadow-lg: 0 8px 32px rgba(184, 169, 232, 0.12);
-    --shadow-xl: 0 16px 48px rgba(184, 169, 232, 0.15);
+    /* === Shadows (dark theme — deeper, blue-tinted) === */
+    --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
 
     /* === Layout === */
     --max-width: 1280px;
     --header-height: 72px;
+}
+
+/* ========================================
+   LIGHT THEME OVERRIDES
+   ======================================== */
+[data-theme="light"] {
+    --color-primary: #3B82F6;
+    --color-primary-dark: #2563EB;
+    --color-primary-light: rgba(59, 130, 246, 0.08);
+    --color-accent: #3B82F6;
+    --color-accent-dark: #2563EB;
+    --color-accent-light: rgba(59, 130, 246, 0.04);
+
+    --color-lavender: #818cf8;
+    --color-lavender-light: rgba(129, 140, 248, 0.06);
+
+    --color-bg: #FFFFFF;
+    --color-white: #FFFFFF;
+    --color-text: #1E293B;
+    --color-text-light: #64748B;
+    --color-border: #E2E8F0;
+    --color-border-light: #F1F5F9;
+
+    --color-surface: #F8F9FC;
+    --color-surface-raised: #FFFFFF;
+    --color-bg-deep: #F0F1F5;
+
+    --color-header-bg: rgba(255, 255, 255, 0.9);
+    --color-glass-bg: rgba(255, 255, 255, 0.8);
+    --color-glass-subtle: rgba(0, 0, 0, 0.02);
+    --color-glass-border: rgba(0, 0, 0, 0.06);
+    --color-glass-border-md: rgba(0, 0, 0, 0.1);
+
+    --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.12);
 }

@@ -243,6 +243,27 @@
     }
 
     // ========================================
+    // THEME TOGGLE
+    // ========================================
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', function () {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+
+            html.classList.add('theme-switching');
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('ww-theme', next);
+
+            setTimeout(function () {
+                html.classList.remove('theme-switching');
+            }, 500);
+        });
+    }
+
+    // ========================================
     // CONSOLE BRANDING
     // ========================================
     console.log(
