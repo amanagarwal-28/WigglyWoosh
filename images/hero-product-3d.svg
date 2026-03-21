@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 560" fill="none">
+  <defs>
+    <!-- Collar gradient -->
+    <linearGradient id="collarBody" x1="100" y1="120" x2="460" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="30%" stop-color="#e2e8f0"/>
+      <stop offset="60%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-center="#cbd5e1"/>
+    </linearGradient>
+    <!-- Brooch module gradient -->
+    <linearGradient id="broochMod" x1="200" y1="160" x2="360" y2="340" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#f1f5f9"/>
+      <stop offset="100%" stop-color="#dde4ed"/>
+    </linearGradient>
+    <!-- Glass overlay -->
+    <linearGradient id="glassOverlay" x1="220" y1="180" x2="320" y2="280" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05"/>
+    </linearGradient>
+    <!-- Screen gradient -->
+    <linearGradient id="screenBg" x1="245" y1="220" x2="315" y2="300" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <!-- Blue accent glow -->
+    <radialGradient id="blueGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.7"/>
+      <stop offset="70%" stop-color="#3b82f6" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Ambient glow behind device -->
+    <radialGradient id="ambientGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.12"/>
+      <stop offset="60%" stop-color="#3b82f6" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Shadows -->
+    <filter id="mainShadow" x="-15%" y="-15%" width="130%" height="135%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#0f172a" flood-opacity="0.25"/>
+    </filter>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#1e3a5f" flood-opacity="0.15"/>
+    </filter>
+    <filter id="pulseGlow">
+      <feGaussianBlur stdDeviation="4" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="screenGlow">
+      <feGaussianBlur stdDeviation="2" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Ambient background glow -->
+  <ellipse cx="280" cy="280" rx="240" ry="240" fill="url(#ambientGlow)"/>
+
+  <!-- === COLLAR BAND (curved, isometric) === -->
+  <g filter="url(#mainShadow)">
+    <!-- Outer collar arc -->
+    <path d="M100,300 Q100,160 200,120 L360,120 Q460,160 460,300 Q460,400 380,430 L180,430 Q100,400 100,300 Z"
+      fill="url(#collarBody)" stroke="#cbd5e1" stroke-width="1.5"/>
+    <!-- Inner collar cutout  -->
+    <path d="M140,300 Q140,190 220,155 L340,155 Q420,190 420,300 Q420,380 360,405 L200,405 Q140,380 140,300 Z"
+      fill="#121212" stroke="#334155" stroke-width="0.8"/>
+    <!-- Collar texture lines -->
+    <line x1="120" y1="220" x2="440" y2="220" stroke="#e2e8f0" stroke-width="0.4" opacity="0.3"/>
+    <line x1="115" y1="260" x2="445" y2="260" stroke="#e2e8f0" stroke-width="0.4" opacity="0.2"/>
+    <line x1="112" y1="340" x2="448" y2="340" stroke="#e2e8f0" stroke-width="0.4" opacity="0.2"/>
+    <!-- Collar clasp -->
+    <rect x="252" y="415" width="56" height="22" rx="6" fill="#94a3b8" stroke="#64748b" stroke-width="0.8"/>
+    <rect x="262" y="419" width="36" height="14" rx="4" fill="#cbd5e1"/>
+    <circle cx="280" cy="426" r="3" fill="#64748b"/>
+  </g>
+
+  <!-- === SMART BROOCH MODULE (central) === -->
+  <g filter="url(#softShadow)">
+    <!-- Main housing -->
+    <rect x="215" y="180" width="130" height="130" rx="28" fill="url(#broochMod)" stroke="#cbd5e1" stroke-width="1"/>
+    <!-- Bezel ring -->
+    <rect x="222" y="187" width="116" height="116" rx="24" fill="none" stroke="#94a3b8" stroke-width="0.8" opacity="0.6"/>
+    <!-- Glass highlight -->
+    <ellipse cx="260" cy="210" rx="28" ry="14" fill="url(#glassOverlay)"/>
+  </g>
+
+  <!-- === OLED DISPLAY === -->
+  <rect x="237" y="202" width="86" height="86" rx="16" fill="url(#screenBg)"/>
+  <!-- Screen border glow -->
+  <rect x="237" y="202" width="86" height="86" rx="16" fill="none" stroke="#3b82f6" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- Screen content -->
+  <g filter="url(#screenGlow)">
+    <!-- Heart rate value -->
+    <text x="280" y="232" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="22" fill="#ffffff" font-weight="700" letter-spacing="-0.02em">78</text>
+    <text x="280" y="244" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="7" fill="#64748b" font-weight="500" letter-spacing="0.05em">BPM</text>
+
+    <!-- Mini heartbeat line -->
+    <polyline points="248,255 254,255 258,245 264,265 268,250 274,260 278,255 284,255 288,248 292,262 296,253 302,255 312,255"
+      stroke="#3b82f6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- Bottom stats row -->
+    <text x="255" y="276" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="7" fill="#3b82f6" font-weight="600">38.2°</text>
+    <text x="280" y="276" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="5" fill="#475569">|</text>
+    <text x="305" y="276" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="7" fill="#10b981" font-weight="600">Active</text>
+  </g>
+
+  <!-- === LED STATUS RING === -->
+  <!-- Top LED -->
+  <circle cx="280" cy="192" r="3" fill="#3b82f6" opacity="0.9"/>
+  <circle cx="280" cy="192" r="8" fill="url(#blueGlow)"/>
+
+  <!-- === SENSOR DOTS on housing === -->
+  <circle cx="230" cy="245" r="2.5" fill="#64748b" opacity="0.5"/>
+  <circle cx="330" cy="245" r="2.5" fill="#64748b" opacity="0.5"/>
+
+  <!-- === FLOATING DATA PARTICLES (ambient tech feel) === -->
+  <g opacity="0.4">
+    <circle cx="150" cy="200" r="2" fill="#3b82f6"/>
+    <circle cx="420" cy="230" r="1.5" fill="#3b82f6"/>
+    <circle cx="170" cy="380" r="1.8" fill="#60a5fa"/>
+    <circle cx="400" cy="360" r="2.2" fill="#60a5fa"/>
+    <circle cx="130" cy="290" r="1.2" fill="#93c5fd"/>
+    <circle cx="440" cy="300" r="1.5" fill="#93c5fd"/>
+  </g>
+
+  <!-- === SUBTLE CONNECTION ARCS (data flow) === -->
+  <g opacity="0.15" stroke="#3b82f6" stroke-width="0.8" fill="none">
+    <path d="M150,200 Q200,180 225,200"/>
+    <path d="M335,245 Q380,250 420,230"/>
+    <path d="M170,380 Q200,360 220,310"/>
+    <path d="M340,310 Q380,340 400,360"/>
+  </g>
+</svg>

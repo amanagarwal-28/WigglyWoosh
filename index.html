@@ -7,7 +7,8 @@
     <title>Wiggly Woosh — The Future of Pet Care</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="src/css/variables.css">
     <link rel="stylesheet" href="src/css/global.css">
@@ -54,55 +55,85 @@
 
     <main>
 
-        <!-- ========== HERO SECTION (Supertails Mix) ========== -->
-        <section class="hero" id="hero">
-            <div class="container hero__container">
-                <div class="hero__content">
-                    <p class="hero__eyebrow"><img src="images/icon-paw.svg" alt="" class="icon-3d icon-3d--inline">
-                        India's First Smart Pet Health Ecosystem</p>
-                    <h1 class="hero__headline">
-                        Expert care meets<br>
-                        <span class="text-gradient">effortless technology.</span>
-                    </h1>
-                    <p class="hero__subheadline">
-                        We've integrated a smart wearable with an AI-driven feeder to create
-                        the first <strong>self-correcting health loop</strong> for your pet.
-                    </p>
-                    <div class="hero__actions">
-                        <a href="#waitlist" class="btn btn--primary btn--lg">Join the Waitlist</a>
-                        <a href="#the-tech" class="btn btn--outline btn--lg">See How It Works</a>
+        <!-- ========== HERO SECTION (Dark Minimalist) ========== -->
+        <section class="hero-dark" id="hero">
+            <div class="hero-dark__container">
+                <div class="hero-dark__content">
+                    <div class="hero-dark__badge">
+                        <!-- Lucide: Zap icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                        </svg>
+                        Now in development
                     </div>
-                    <div class="hero__stats">
-                        <div class="hero__stat">
-                            <span class="hero__stat-number">24/7</span>
-                            <span class="hero__stat-label">Health Monitoring</span>
+                    <h1 class="hero-dark__headline">
+                        The First Self&#8209;Correcting<br>Health Loop for Pets
+                    </h1>
+                    <p class="hero-dark__subheadline">
+                        A smart wearable and AI-driven feeder working in a closed loop —
+                        tracking vitals, calculating needs, and dispensing precise nutrition automatically.
+                    </p>
+                    <div class="hero-dark__actions">
+                        <a href="#waitlist" class="hero-dark__btn">
+                            Join Waitlist
+                            <!-- Lucide: ArrowRight icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="hero-dark__meta">
+                        <div class="hero-dark__meta-item">
+                            <!-- Lucide: Activity icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg>
+                            <span>24/7 Monitoring</span>
                         </div>
-                        <div class="hero__stat-divider"></div>
-                        <div class="hero__stat">
-                            <span class="hero__stat-number">±2%</span>
-                            <span class="hero__stat-label">Portion Accuracy</span>
+                        <div class="hero-dark__meta-divider"></div>
+                        <div class="hero-dark__meta-item">
+                            <!-- Lucide: Target icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10" />
+                                <circle cx="12" cy="12" r="6" />
+                                <circle cx="12" cy="12" r="2" />
+                            </svg>
+                            <span>±2% Accuracy</span>
                         </div>
-                        <div class="hero__stat-divider"></div>
-                        <div class="hero__stat">
-                            <span class="hero__stat-number">AI</span>
-                            <span class="hero__stat-label">Adaptive Engine</span>
+                        <div class="hero-dark__meta-divider"></div>
+                        <div class="hero-dark__meta-item">
+                            <!-- Lucide: Cpu icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                                <rect x="9" y="9" width="6" height="6" />
+                                <line x1="9" y1="1" x2="9" y2="4" />
+                                <line x1="15" y1="1" x2="15" y2="4" />
+                                <line x1="9" y1="20" x2="9" y2="23" />
+                                <line x1="15" y1="20" x2="15" y2="23" />
+                                <line x1="20" y1="9" x2="23" y2="9" />
+                                <line x1="20" y1="14" x2="23" y2="14" />
+                                <line x1="1" y1="9" x2="4" y2="9" />
+                                <line x1="1" y1="14" x2="4" y2="14" />
+                            </svg>
+                            <span>AI Adaptive</span>
                         </div>
                     </div>
                 </div>
-                <div class="hero__visual">
-                    <div class="hero__image-wrapper">
-                        <!-- Replace with actual product/pet imagery -->
-                        <div class="hero__placeholder-img">
-                            <div class="hero__placeholder-pet">
-                                <span>🐕</span>
-                                <p>Happy & Healthy Pet</p>
-                            </div>
-                            <div class="hero__placeholder-device">
-                                <span>⌚</span>
-                                <p>Smart Brooch + Feeder</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="hero-dark__visual">
+                    <div class="hero-dark__product-glow"></div>
+                    <img src="images/hero-product-3d.svg"
+                        alt="Wiggly Woosh Smart Pet Wearable — 3D product shot showing collar with health monitoring display"
+                        class="hero-dark__product-img" width="520" height="520">
                 </div>
             </div>
         </section>
