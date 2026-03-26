@@ -399,6 +399,196 @@
     });
 
     // ========================================
+    // MAGNETIC HOVER FOR PRIMARY CTAS
+    // ========================================
+    const magneticButtons = Array.from(document.querySelectorAll('.btn--primary, .hero-dark__btn'));
+    const canUseMagnet =
+        magneticButtons.length > 0 &&
+        window.matchMedia('(pointer: fine)').matches &&
+        !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (canUseMagnet) {
+        const MAGNET_TRIGGER_DISTANCE = 40;
+        const MAGNET_MIN_OFFSET = 5;
+        const MAGNET_MAX_OFFSET = 10;
+        const SPRING_STIFFNESS = 150;
+        const SPRING_DAMPING = 15;
+
+        let pointerX = 0;
+        let pointerY = 0;
+        let pointerInsideWindow = false;
+        let rafId = null;
+        let lastTime = performance.now();
+
+        const states = magneticButtons.map(function (button) {
+            button.classList.add('magnetic-cta');
+            return {
+                button: button,
+                x: 0,
+                y: 0,
+                vx: 0,
+                vy: 0,
+                targetX: 0,
+                targetY: 0,
+                scale: 1,
+                targetScale: 1
+            };
+        });
+
+        function applyTransform(state) {
+            state.button.style.transform =
+                'translate3d(' + state.x.toFixed(2) + 'px, ' + state.y.toFixed(2) + 'px, 0) scale(' + state.scale.toFixed(3) + ')';
+        }
+
+        function updateMagnetTargets() {
+            states.forEach(function (state) {
+                if (!pointerInsideWindow) {
+                    state.targetX = 0;
+                    state.targetY = 0;
+                    return;
+                }
+
+                var rect = state.button.getBoundingClientRect();
+                var nearestX = Math.max(rect.left, Math.min(pointerX, rect.right));
+                var nearestY = Math.max(rect.top, Math.min(pointerY, rect.bottom));
+                var distance = Math.hypot(pointerX - nearestX, pointerY - nearestY);
+
+                if (distance > MAGNET_TRIGGER_DISTANCE) {
+                    state.targetX = 0;
+                    state.targetY = 0;
+                    return;
+                }
+
+                var centerX = rect.left + rect.width / 2;
+                var centerY = rect.top + rect.height / 2;
+                var dx = pointerX - centerX;
+                var dy = pointerY - centerY;
+                var length = Math.hypot(dx, dy);
+
+                if (length < 0.001) {
+                    state.targetX = 0;
+                    state.targetY = 0;
+                    return;
+                }
+
+                var pullStrength = 1 - distance / MAGNET_TRIGGER_DISTANCE;
+                var offset = MAGNET_MIN_OFFSET + (MAGNET_MAX_OFFSET - MAGNET_MIN_OFFSET) * pullStrength;
+
+                state.targetX = (dx / length) * offset;
+                state.targetY = (dy / length) * offset;
+            });
+        }
+
+        function tick(now) {
+            var dt = Math.min((now - lastTime) / 1000, 0.034);
+            lastTime = now;
+
+            var hasMotion = false;
+
+            states.forEach(function (state) {
+                var ax = SPRING_STIFFNESS * (state.targetX - state.x) - SPRING_DAMPING * state.vx;
+                var ay = SPRING_STIFFNESS * (state.targetY - state.y) - SPRING_DAMPING * state.vy;
+
+                state.vx += ax * dt;
+                state.vy += ay * dt;
+                state.x += state.vx * dt;
+                state.y += state.vy * dt;
+
+                state.scale += (state.targetScale - state.scale) * Math.min(1, dt * 24);
+
+                applyTransform(state);
+
+                if (
+                    Math.abs(state.targetX - state.x) > 0.02 ||
+                    Math.abs(state.targetY - state.y) > 0.02 ||
+                    Math.abs(state.vx) > 0.02 ||
+                    Math.abs(state.vy) > 0.02 ||
+                    Math.abs(state.targetScale - state.scale) > 0.002
+                ) {
+                    hasMotion = true;
+                }
+            });
+
+            if (hasMotion || pointerInsideWindow) {
+                rafId = requestAnimationFrame(tick);
+            } else {
+                rafId = null;
+            }
+        }
+
+        function ensureAnimation() {
+            if (rafId === null) {
+                lastTime = performance.now();
+                rafId = requestAnimationFrame(tick);
+            }
+        }
+
+        function setPressed(button, pressed) {
+            states.forEach(function (state) {
+                if (state.button === button) {
+                    state.targetScale = pressed ? 0.95 : 1;
+                }
+            });
+            ensureAnimation();
+        }
+
+        document.addEventListener('mousemove', function (e) {
+            pointerX = e.clientX;
+            pointerY = e.clientY;
+            pointerInsideWindow = true;
+            updateMagnetTargets();
+            ensureAnimation();
+        }, { passive: true });
+
+        window.addEventListener('mouseout', function (e) {
+            if (e.relatedTarget === null) {
+                pointerInsideWindow = false;
+                updateMagnetTargets();
+                ensureAnimation();
+            }
+        });
+
+        window.addEventListener('resize', function () {
+            updateMagnetTargets();
+            ensureAnimation();
+        });
+
+        window.addEventListener('scroll', function () {
+            updateMagnetTargets();
+            ensureAnimation();
+        }, { passive: true });
+
+        magneticButtons.forEach(function (button) {
+            button.addEventListener('pointerdown', function () {
+                setPressed(button, true);
+            });
+
+            button.addEventListener('pointerup', function () {
+                setPressed(button, false);
+            });
+
+            button.addEventListener('pointerleave', function () {
+                setPressed(button, false);
+            });
+
+            button.addEventListener('pointercancel', function () {
+                setPressed(button, false);
+            });
+
+            button.addEventListener('blur', function () {
+                setPressed(button, false);
+            });
+
+            button.addEventListener('click', function () {
+                setPressed(button, true);
+                setTimeout(function () {
+                    setPressed(button, false);
+                }, 90);
+            });
+        });
+    }
+
+    // ========================================
     // CONSOLE BRANDING
     // ========================================
     console.log(
