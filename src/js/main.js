@@ -68,9 +68,12 @@
     // ========================================
     // INTERSECTION OBSERVER — FADE IN
     // ========================================
+    // Signal to CSS that JS is ready to handle animations
+    document.documentElement.classList.add('js-ready');
+
     const fadeElements = document.querySelectorAll('.fade-in');
 
-    if ('IntersectionObserver' in window) {
+    if ('IntersectionObserver' in window && fadeElements.length > 0) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -79,11 +82,20 @@
                 }
             });
         }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -40px 0px'
+            threshold: 0.01,
+            rootMargin: '0px 0px 50px 0px'
         });
 
         fadeElements.forEach(el => observer.observe(el));
+
+        // Safety fallback — if any elements are still not visible after 3s, force them visible
+        setTimeout(function () {
+            fadeElements.forEach(function (el) {
+                if (!el.classList.contains('is-visible')) {
+                    el.classList.add('is-visible');
+                }
+            });
+        }, 3000);
     } else {
         // Fallback: show all elements
         fadeElements.forEach(el => el.classList.add('is-visible'));
