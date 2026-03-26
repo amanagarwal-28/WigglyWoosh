@@ -72,12 +72,27 @@
     document.documentElement.classList.add('js-ready');
 
     const fadeElements = document.querySelectorAll('.fade-in');
+    const productCards = document.querySelectorAll('.products .product-card.fade-in');
+
+    productCards.forEach((card, index) => {
+        card.classList.add('fade-in--stagger');
+        card.dataset.revealDelay = String(index * 100);
+    });
 
     if ('IntersectionObserver' in window && fadeElements.length > 0) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
+                    const delay = Number(entry.target.dataset.revealDelay || 0);
+
+                    if (delay > 0) {
+                        setTimeout(() => {
+                            entry.target.classList.add('is-visible');
+                        }, delay);
+                    } else {
+                        entry.target.classList.add('is-visible');
+                    }
+
                     observer.unobserve(entry.target);
                 }
             });
@@ -87,15 +102,6 @@
         });
 
         fadeElements.forEach(el => observer.observe(el));
-
-        // Safety fallback — if any elements are still not visible after 3s, force them visible
-        setTimeout(function () {
-            fadeElements.forEach(function (el) {
-                if (!el.classList.contains('is-visible')) {
-                    el.classList.add('is-visible');
-                }
-            });
-        }, 3000);
     } else {
         // Fallback: show all elements
         fadeElements.forEach(el => el.classList.add('is-visible'));
