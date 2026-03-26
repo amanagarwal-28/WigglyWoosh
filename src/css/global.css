@@ -169,8 +169,8 @@ ol {
     width: 100%;
     z-index: 1000;
     background: rgba(18, 18, 18, 0.8);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(var(--header-dof-blur, 0px));
+    -webkit-backdrop-filter: blur(var(--header-dof-blur, 0px));
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: none;
     transition: box-shadow 0.3s ease, background 0.3s ease;
