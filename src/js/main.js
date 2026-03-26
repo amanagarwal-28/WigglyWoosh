@@ -33,6 +33,10 @@
     let lastScrollY = 0;
     let ticking = false;
 
+    // Parallax target
+    var heroProductImg = document.querySelector('.hero-dark__product-img');
+    var heroSection = document.querySelector('.hero-dark');
+
     function updateHeader() {
         if (header) {
             if (window.scrollY > 10) {
@@ -41,6 +45,15 @@
                 header.classList.remove('is-scrolled');
             }
         }
+
+        // Parallax on hero product image
+        if (heroProductImg && heroSection) {
+            var rect = heroSection.getBoundingClientRect();
+            if (rect.bottom > 0 && rect.top < window.innerHeight) {
+                heroProductImg.style.transform = 'translateY(' + (window.scrollY * 0.08) + 'px)';
+            }
+        }
+
         ticking = false;
     }
 
@@ -81,6 +94,39 @@
     // ========================================
     const dashboardPreview = document.querySelector('.dashboard-preview');
 
+    // Counter animation helper
+    function animateCounter(el, target, duration, suffix) {
+        var isDecimal = String(target).indexOf('.') !== -1;
+        var start = 0;
+        var startTime = null;
+
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            var progress = Math.min((timestamp - startTime) / duration, 1);
+            // Ease out cubic
+            var eased = 1 - Math.pow(1 - progress, 3);
+            var current = start + (target - start) * eased;
+
+            if (isDecimal) {
+                el.textContent = current.toFixed(1);
+            } else {
+                el.textContent = Math.round(current);
+            }
+
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                // Restore original HTML (with <small> tags)
+                if (isDecimal) {
+                    el.innerHTML = target.toFixed(1) + ' ' + suffix;
+                } else {
+                    el.innerHTML = Math.round(target) + ' ' + suffix;
+                }
+            }
+        }
+        requestAnimationFrame(step);
+    }
+
     if (dashboardPreview && 'IntersectionObserver' in window) {
         const dashObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
@@ -98,6 +144,19 @@
                         requestAnimationFrame(function () {
                             bar.style.width = targetWidth;
                         });
+                    });
+
+                    // Animate the number counters
+                    var valueEls = entry.target.querySelectorAll('.vital-card__value');
+                    valueEls.forEach(function (el) {
+                        var smallTag = el.querySelector('small');
+                        var suffix = smallTag ? '<small>' + smallTag.textContent + '</small>' : '';
+                        var textContent = el.textContent.trim();
+                        var numericPart = parseFloat(textContent);
+
+                        if (!isNaN(numericPart)) {
+                            animateCounter(el, numericPart, 1800, suffix);
+                        }
                     });
 
                     dashObserver.unobserve(entry.target);
@@ -249,19 +308,77 @@
     const html = document.documentElement;
 
     if (themeToggle) {
-        themeToggle.addEventListener('click', function () {
+        themeToggle.addEventListener('click', function (e) {
             const current = html.getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
 
-            html.classList.add('theme-switching');
-            html.setAttribute('data-theme', next);
-            localStorage.setItem('ww-theme', next);
+            // Try using View Transitions API for circular reveal
+            if (document.startViewTransition) {
+                // Get button center coordinates
+                var rect = themeToggle.getBoundingClientRect();
+                var x = rect.left + rect.width / 2;
+                var y = rect.top + rect.height / 2;
+                // Max radius to cover entire screen
+                var maxRadius = Math.hypot(
+                    Math.max(x, window.innerWidth - x),
+                    Math.max(y, window.innerHeight - y)
+                );
 
-            setTimeout(function () {
-                html.classList.remove('theme-switching');
-            }, 500);
+                var transition = document.startViewTransition(function () {
+                    html.setAttribute('data-theme', next);
+                    localStorage.setItem('ww-theme', next);
+                });
+
+                transition.ready.then(function () {
+                    document.documentElement.animate(
+                        {
+                            clipPath: [
+                                'circle(0px at ' + x + 'px ' + y + 'px)',
+                                'circle(' + maxRadius + 'px at ' + x + 'px ' + y + 'px)'
+                            ]
+                        },
+                        {
+                            duration: 600,
+                            easing: 'ease-in-out',
+                            pseudoElement: '::view-transition-new(root)'
+                        }
+                    );
+                });
+            } else {
+                // Fallback for browsers without View Transitions
+                html.classList.add('theme-switching');
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('ww-theme', next);
+
+                setTimeout(function () {
+                    html.classList.remove('theme-switching');
+                }, 500);
+            }
         });
     }
+
+    // ========================================
+    // 3D TILT EFFECT ON CARDS
+    // ========================================
+    var tiltCards = document.querySelectorAll('.product-card, .eco-card');
+
+    tiltCards.forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            var centerX = rect.width / 2;
+            var centerY = rect.height / 2;
+            var rotateX = ((y - centerY) / centerY) * -5;
+            var rotateY = ((x - centerX) / centerX) * 5;
+
+            card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) translateY(-8px) scale(1.02)';
+        });
+
+        card.addEventListener('mouseleave', function () {
+            card.style.transform = '';
+        });
+    });
 
     // ========================================
     // CONSOLE BRANDING

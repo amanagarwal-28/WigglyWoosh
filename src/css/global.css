@@ -596,6 +596,30 @@ ol {
         0 0 0 1px rgba(255, 255, 255, 0.06),
         0 1px 2px rgba(0, 0, 0, 0.3),
         0 0 40px rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-dark__btn::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.25) 50%,
+        transparent 70%
+    );
+    animation: btnShimmer 3.5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes btnShimmer {
+    0% { transform: translateX(-100%) rotate(45deg); }
+    100% { transform: translateX(100%) rotate(45deg); }
 }
 
 .hero-dark__btn:hover {
@@ -664,6 +688,44 @@ ol {
     pointer-events: none;
 }
 
+/* Orbiting particle 1 */
+.hero-dark__product-glow::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #3b82f6;
+    box-shadow: 0 0 16px 4px rgba(59, 130, 246, 0.6);
+    top: 50%;
+    left: 50%;
+    animation: orbit1 8s linear infinite;
+}
+
+/* Orbiting particle 2 */
+.hero-dark__product-glow::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #818cf8;
+    box-shadow: 0 0 12px 3px rgba(129, 140, 248, 0.5);
+    top: 50%;
+    left: 50%;
+    animation: orbit2 12s linear infinite reverse;
+}
+
+@keyframes orbit1 {
+    from { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+}
+
+@keyframes orbit2 {
+    from { transform: rotate(0deg) translateX(140px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(140px) rotate(-360deg); }
+}
+
 .hero-dark__product-img {
     width: 100%;
     max-width: 520px;
@@ -683,6 +745,69 @@ ol {
 
     50% {
         transform: translateY(-12px);
+    }
+}
+
+/* --- Animated data rings (product demo effect) --- */
+.hero-dark__data-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 400px;
+    pointer-events: none;
+}
+
+.data-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    animation: dataRingPulse 4s ease-out infinite;
+}
+
+.data-ring--1 {
+    width: 250px;
+    height: 250px;
+    border-color: rgba(59, 130, 246, 0.25);
+    border-style: dashed;
+    animation-delay: 0s;
+    animation-duration: 4s;
+}
+
+.data-ring--2 {
+    width: 340px;
+    height: 340px;
+    border-color: rgba(129, 140, 248, 0.15);
+    border-style: dotted;
+    animation-delay: 1.3s;
+    animation-duration: 4s;
+}
+
+.data-ring--3 {
+    width: 430px;
+    height: 430px;
+    border-color: rgba(56, 189, 248, 0.1);
+    border-style: dashed;
+    animation-delay: 2.6s;
+    animation-duration: 4s;
+}
+
+@keyframes dataRingPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.7) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.1) rotate(45deg);
+        opacity: 0;
     }
 }
 
@@ -816,6 +941,18 @@ ol {
 .ecosystem {
     padding: var(--space-5xl) 0;
     background: #121212;
+    position: relative;
+}
+
+.ecosystem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(18, 18, 18, 0) 0%, transparent 100%);
+    pointer-events: none;
 }
 
 .ecosystem__grid {
@@ -853,9 +990,9 @@ ol {
 }
 
 .eco-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.08);
-    border-color: rgba(59, 130, 246, 0.2);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
 }
 
 .eco-card:nth-child(1)::before {
@@ -1047,10 +1184,11 @@ ol {
     width: 60px;
     height: 2px;
     display: block;
+    filter: drop-shadow(0 0 4px rgba(59, 130, 246, 0.4));
 }
 
 .hiw__connector-line line {
-    animation: dashFlow 1.5s linear infinite;
+    animation: dashFlow 1.2s linear infinite;
 }
 
 @keyframes dashFlow {
@@ -1065,7 +1203,14 @@ ol {
 
 .hiw__connector-arrow {
     flex-shrink: 0;
-    opacity: 0.7;
+    opacity: 0.9;
+    animation: arrowPulse 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.5));
+}
+
+@keyframes arrowPulse {
+    0%, 100% { opacity: 0.5; transform: translateX(0); }
+    50% { opacity: 1; transform: translateX(3px); }
 }
 
 /* --- Patent badge --- */
@@ -1124,11 +1269,30 @@ ol {
     height: 100%;
 }
 
-/* --- Pro card gradient border --- */
+/* --- Pro card animated gradient border --- */
 .pricing__card--pro {
-    background: linear-gradient(135deg, #3B82F6, #818cf8);
+    background: conic-gradient(from var(--pricing-angle, 0deg), #3B82F6, #818cf8, #38bdf8, #3B82F6);
     padding: 2px;
     border: none;
+    animation: pricingBorderRotate 4s linear infinite;
+    box-shadow: 0 0 24px rgba(59, 130, 246, 0.2), 0 0 48px rgba(129, 140, 248, 0.1);
+}
+
+@property --pricing-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes pricingBorderRotate {
+    to { --pricing-angle: 360deg; }
+}
+
+/* Fallback for browsers without @property */
+@supports not (background: conic-gradient(from 0deg, red, blue)) {
+    .pricing__card--pro {
+        background: linear-gradient(135deg, #3B82F6, #818cf8);
+    }
 }
 
 .pricing__card--pro .pricing__card-inner {
@@ -1262,6 +1426,18 @@ ol {
 .products {
     padding: var(--space-5xl) 0;
     background: #121212;
+    position: relative;
+}
+
+.products::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, rgba(15, 15, 26, 0.6), transparent);
+    pointer-events: none;
 }
 
 .products__grid {
@@ -1283,9 +1459,9 @@ ol {
 }
 
 .product-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 40px rgba(59, 130, 246, 0.08);
-    border-color: rgba(59, 130, 246, 0.2);
+    transform: translateY(-8px) scale(1.01);
+    box-shadow: 0 16px 48px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
 }
 
 .product-card__badge {
@@ -1609,6 +1785,18 @@ tbody tr:last-child .comparison__highlight::before {
 .proactive-care {
     padding: var(--space-5xl) 0;
     background: #121212;
+    position: relative;
+}
+
+.proactive-care::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 120px;
+    background: linear-gradient(to bottom, rgba(18, 18, 18, 0.8), transparent);
+    pointer-events: none;
 }
 
 .dashboard-preview {
@@ -2201,6 +2389,40 @@ tbody tr:last-child .comparison__highlight::before {
     margin-top: var(--space-md);
 }
 
+/* --- Waitlist social proof counter --- */
+.waitlist-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: var(--space-lg);
+    padding: 10px 20px;
+    background: rgba(52, 211, 153, 0.08);
+    border: 1px solid rgba(52, 211, 153, 0.2);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-sm);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.waitlist-counter strong {
+    color: #34d399;
+    font-weight: 700;
+}
+
+.waitlist-counter__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+    animation: counterPulse 2s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+@keyframes counterPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+}
+
 /* ========================================
    FOOTER
    ======================================== */
@@ -2631,6 +2853,21 @@ tbody tr:last-child .comparison__highlight::before {
         border-color 500ms ease,
         box-shadow 500ms ease,
         opacity 500ms ease !important;
+}
+
+/* View Transitions API — circular reveal */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+    z-index: 1;
+}
+
+::view-transition-new(root) {
+    z-index: 9999;
 }
 
 /* ========================================
