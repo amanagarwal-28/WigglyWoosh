@@ -404,7 +404,9 @@
     // ========================================
     // MAGNETIC HOVER FOR PRIMARY CTAS
     // ========================================
-    const magneticButtons = Array.from(document.querySelectorAll('.btn--primary, .hero-dark__btn'));
+    const magneticButtons = Array.from(document.querySelectorAll('.btn--primary, .hero-dark__btn')).filter(function (b) {
+        return !b.id || b.id !== 'waitlistHeroBtn';
+    });
     const canUseMagnet =
         magneticButtons.length > 0 &&
         window.matchMedia('(pointer: fine)').matches &&
@@ -590,6 +592,92 @@
             });
         });
     }
+
+    // ========================================
+    // HERO WAITLIST BUTTON — DOG SPRINT ANIMATION
+    // ========================================
+    (function () {
+        var heroBtn = document.getElementById('waitlistHeroBtn');
+        if (!heroBtn) return;
+
+        var dogSvg = heroBtn.querySelector('.ww-btn__dog');
+        var dogStage = heroBtn.querySelector('.ww-btn__dog-stage');
+        if (!dogSvg || !dogStage) return;
+
+        var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Spring state
+        var DOG_STIFFNESS = 110;
+        var DOG_DAMPING = 11;
+        var dogX = 0;   // current position (px, relative to stage start)
+        var dogVx = 0;   // velocity
+        var dogTarget = 0;
+        var dogRafId = null;
+        var lastDogTime = 0;
+
+        function setDogX(px) {
+            dogSvg.style.setProperty('--dog-x', px.toFixed(2) + 'px');
+        }
+
+        function springTick(now) {
+            var dt = Math.min((now - lastDogTime) / 1000, 0.034);
+            lastDogTime = now;
+
+            var ax = DOG_STIFFNESS * (dogTarget - dogX) - DOG_DAMPING * dogVx;
+            dogVx += ax * dt;
+            dogX += dogVx * dt;
+            setDogX(dogX);
+
+            var settled = Math.abs(dogTarget - dogX) < 0.5 && Math.abs(dogVx) < 0.5;
+            if (!settled) {
+                dogRafId = requestAnimationFrame(springTick);
+            } else {
+                dogX = dogTarget;
+                setDogX(dogX);
+                dogRafId = null;
+                onDogArrived();
+            }
+        }
+
+        function onDogArrived() {
+            heroBtn.classList.remove('ww-btn--running');
+            heroBtn.classList.add('ww-btn--confirmed');
+        }
+
+        function runDogAnimation() {
+            // Measure available sprint distance: stage width minus dog width minus padding
+            var stageW = dogStage.offsetWidth || 200;
+            var dogW = dogSvg.offsetWidth || 80;
+            var padding = 24;
+            dogTarget = stageW - dogW - padding * 2;
+
+            dogX = -dogW;  // start offscreen left
+            dogVx = 260;    // give it an immediate forward kick (spring units/s)
+            lastDogTime = performance.now();
+
+            setDogX(dogX);
+
+            if (dogRafId) cancelAnimationFrame(dogRafId);
+            dogRafId = requestAnimationFrame(springTick);
+        }
+
+        heroBtn.addEventListener('click', function (e) {
+            e.preventDefault(); // anchor navigates; we animate instead
+
+            // Already in an animated state — do nothing
+            if (heroBtn.classList.contains('ww-btn--running') ||
+                heroBtn.classList.contains('ww-btn--confirmed')) return;
+
+            if (reducedMotion) {
+                // Skip straight to confirmed for reduced-motion users
+                heroBtn.classList.add('ww-btn--confirmed');
+                return;
+            }
+
+            heroBtn.classList.add('ww-btn--running');
+            runDogAnimation();
+        });
+    }());
 
     // ========================================
     // CONSOLE BRANDING

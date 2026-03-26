@@ -648,6 +648,239 @@ ol {
     transform: translateX(3px);
 }
 
+/* ========================================
+   HERO WAITLIST BUTTON — LAYERED STATE MACHINE
+   States: idle | running | confirmed
+   ======================================== */
+.hero-dark__btn {
+    /* clip so dog doesn't bleed outside pill */
+    overflow: hidden;
+}
+
+/* Prevent the shimmer ::after from overlapping dog/check layers */
+.hero-dark__btn.ww-btn--running::after,
+.hero-dark__btn.ww-btn--confirmed::after {
+    animation: none;
+    opacity: 0;
+}
+
+/* ----- Shared layer setup ----- */
+.ww-btn__label,
+.ww-btn__dog-stage,
+.ww-btn__confirmed {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    pointer-events: none;
+}
+
+/* idle: label visible, others hidden */
+.ww-btn__label {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+
+.ww-btn__dog-stage {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 8px));
+}
+
+.ww-btn__confirmed {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 8px));
+    gap: 10px;
+}
+
+/* button needs a fixed width/height so layers can be absolutely centred */
+.hero-dark__btn {
+    position: relative;
+    min-width: 180px;
+    min-height: 54px;
+}
+
+/* ----- RUNNING STATE ----- */
+.hero-dark__btn.ww-btn--running .ww-btn__label {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% - 8px));
+}
+
+.hero-dark__btn.ww-btn--running .ww-btn__dog-stage {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+
+/* ----- CONFIRMED STATE ----- */
+.hero-dark__btn.ww-btn--confirmed .ww-btn__running,
+.hero-dark__btn.ww-btn--confirmed .ww-btn__dog-stage {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% - 8px));
+}
+
+.hero-dark__btn.ww-btn--confirmed .ww-btn__confirmed {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+
+.hero-dark__btn.ww-btn--confirmed {
+    background: #121212;
+    color: #ffffff;
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    pointer-events: none;
+}
+
+/* ----- DOG SVG ----- */
+.ww-btn__dog-stage {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0 24px;
+    box-sizing: border-box;
+}
+
+.ww-btn__dog {
+    width: 80px;
+    height: 32px;
+    flex-shrink: 0;
+    /* JS sets translateX via --dog-x to spring the dog across */
+    transform: translateX(var(--dog-x, -24px));
+    will-change: transform;
+    color: #121212;
+    /* inherits stroke colour */
+}
+
+/* Gallop: alternate leg pairs */
+@keyframes dogFrontLegs {
+
+    0%,
+    100% {
+        d: path("M46 19 Q47 24 44 27");
+    }
+
+    50% {
+        d: path("M46 19 Q48 22 50 24");
+    }
+}
+
+@keyframes dogFrontLegs2 {
+
+    0%,
+    100% {
+        d: path("M42 19 Q40 25 38 27");
+    }
+
+    50% {
+        d: path("M42 19 Q38 23 36 25");
+    }
+}
+
+@keyframes dogBackLegs {
+
+    0%,
+    100% {
+        d: path("M32 19 Q34 24 32 27");
+    }
+
+    50% {
+        d: path("M32 19 Q30 23 28 25");
+    }
+}
+
+@keyframes dogBackLegs2 {
+
+    0%,
+    100% {
+        d: path("M36 19 Q35 25 37 27");
+    }
+
+    50% {
+        d: path("M36 19 Q38 22 40 24");
+    }
+}
+
+@keyframes dogBodyBob {
+
+    0%,
+    100% {
+        d: path("M28 18 Q36 14 44 16 Q50 17 54 14");
+    }
+
+    50% {
+        d: path("M28 17 Q36 13 44 15 Q50 16 54 13");
+    }
+}
+
+@keyframes dogTailWag {
+
+    0%,
+    100% {
+        d: path("M28 18 Q22 12 24 8");
+    }
+
+    50% {
+        d: path("M28 18 Q20 14 23 10");
+    }
+}
+
+@keyframes dogEarFlap {
+
+    0%,
+    100% {
+        d: path("M54 9 Q52 5 55 6");
+    }
+
+    50% {
+        d: path("M54 9 Q51 6 54 7");
+    }
+}
+
+.hero-dark__btn.ww-btn--running .dog-leg--fl1 {
+    animation: dogFrontLegs 0.28s ease-in-out infinite;
+}
+
+.hero-dark__btn.ww-btn--running .dog-leg--fl2 {
+    animation: dogFrontLegs2 0.28s ease-in-out infinite 0.14s;
+}
+
+.hero-dark__btn.ww-btn--running .dog-leg--bl1 {
+    animation: dogBackLegs 0.28s ease-in-out infinite 0.07s;
+}
+
+.hero-dark__btn.ww-btn--running .dog-leg--bl2 {
+    animation: dogBackLegs2 0.28s ease-in-out infinite 0.21s;
+}
+
+.hero-dark__btn.ww-btn--running .dog-body {
+    animation: dogBodyBob 0.28s ease-in-out infinite;
+}
+
+.hero-dark__btn.ww-btn--running .dog-tail {
+    animation: dogTailWag 0.22s ease-in-out infinite;
+}
+
+.hero-dark__btn.ww-btn--running .dog-ear {
+    animation: dogEarFlap 0.32s ease-in-out infinite;
+}
+
+/* ----- CHECKMARK DRAW-ON ----- */
+.ww-btn__check {
+    overflow: visible;
+}
+
+.ww-btn__check polyline {
+    stroke-dasharray: 22;
+    stroke-dashoffset: 22;
+    transition: stroke-dashoffset 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.08s;
+}
+
+.hero-dark__btn.ww-btn--confirmed .ww-btn__check polyline {
+    stroke-dashoffset: 0;
+}
+
 /* --- Meta stats --- */
 .hero-dark__meta {
     display: flex;

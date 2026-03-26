@@ -98,15 +98,52 @@
                         tracking vitals, calculating needs, and dispensing precise nutrition automatically.
                     </p>
                     <div class="hero-dark__actions">
-                        <a href="#waitlist" class="hero-dark__btn">
-                            Join Waitlist
-                            <!-- Lucide: ArrowRight icon -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round">
-                                <line x1="5" y1="12" x2="19" y2="12" />
-                                <polyline points="12 5 19 12 12 19" />
-                            </svg>
+                        <a href="#waitlist" class="hero-dark__btn" id="waitlistHeroBtn" aria-live="polite">
+                            <!-- Label layer -->
+                            <span class="ww-btn__label">
+                                Join Waitlist
+                                <svg class="ww-btn__arrow" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <line x1="5" y1="12" x2="19" y2="12" />
+                                    <polyline points="12 5 19 12 12 19" />
+                                </svg>
+                            </span>
+
+                            <!-- Dog running stage -->
+                            <span class="ww-btn__dog-stage" aria-hidden="true">
+                                <svg class="ww-btn__dog" viewBox="0 0 80 32" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <!-- Body -->
+                                    <path class="dog-body" d="M28 18 Q36 14 44 16 Q50 17 54 14" />
+                                    <!-- Head -->
+                                    <circle class="dog-head" cx="56" cy="12" r="4" />
+                                    <!-- Ear -->
+                                    <path class="dog-ear" d="M54 9 Q52 5 55 6" />
+                                    <!-- Tail -->
+                                    <path class="dog-tail" d="M28 18 Q22 12 24 8" />
+                                    <!-- Front legs (alternating) -->
+                                    <path class="dog-leg dog-leg--fl1" d="M46 19 Q47 24 44 27" />
+                                    <path class="dog-leg dog-leg--fl2" d="M42 19 Q40 25 38 27" />
+                                    <!-- Back legs (alternating) -->
+                                    <path class="dog-leg dog-leg--bl1" d="M32 19 Q34 24 32 27" />
+                                    <path class="dog-leg dog-leg--bl2" d="M36 19 Q35 25 37 27" />
+                                    <!-- Ground shadow dots -->
+                                    <circle cx="40" cy="29" r="0.8" opacity="0.4" />
+                                    <circle cx="46" cy="29" r="0.8" opacity="0.4" />
+                                </svg>
+                            </span>
+
+                            <!-- Confirmed state -->
+                            <span class="ww-btn__confirmed" aria-hidden="true">
+                                <svg class="ww-btn__check" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                You're on the list
+                            </span>
                         </a>
                     </div>
                     <div class="hero-dark__meta">
