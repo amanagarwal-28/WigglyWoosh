@@ -615,6 +615,21 @@
         var dogRafId = null;
         var lastDogTime = 0;
 
+        function scrollToWaitlistForm() {
+            var waitlistForm = document.getElementById('waitlistForm');
+            var fallbackTarget = document.querySelector(heroBtn.getAttribute('href'));
+            var target = waitlistForm || fallbackTarget;
+            if (!target) return;
+
+            var headerOffset = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 72;
+            var offsetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+
         function setDogX(px) {
             dogSvg.style.setProperty('--dog-x', px.toFixed(2) + 'px');
         }
@@ -642,6 +657,9 @@
         function onDogArrived() {
             heroBtn.classList.remove('ww-btn--running');
             heroBtn.classList.add('ww-btn--confirmed');
+
+            // Let the confirmation state be visible briefly before scrolling.
+            setTimeout(scrollToWaitlistForm, 220);
         }
 
         function runDogAnimation() {
@@ -670,6 +688,7 @@
 
             if (reducedMotion) {
                 heroBtn.classList.add('ww-btn--confirmed');
+                setTimeout(scrollToWaitlistForm, 120);
                 return;
             }
 
