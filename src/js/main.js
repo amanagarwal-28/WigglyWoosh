@@ -32,7 +32,6 @@
     const header = document.getElementById('header');
     let lastScrollY = 0;
     let ticking = false;
-    const maxHeaderBlur = 8;
 
     // Parallax target
     var heroProductImg = document.querySelector('.hero-dark__product-img');
@@ -46,14 +45,6 @@
                 header.classList.remove('is-scrolled');
             }
 
-            // Increase blur as the hero exits the viewport for a depth-of-field feel.
-            var exitProgress = 0;
-            if (heroSection) {
-                var heroRectForBlur = heroSection.getBoundingClientRect();
-                exitProgress = Math.min(Math.max((-heroRectForBlur.top) / heroRectForBlur.height, 0), 1);
-            }
-
-            header.style.setProperty('--header-dof-blur', (exitProgress * maxHeaderBlur).toFixed(2) + 'px');
         }
 
         // Parallax on hero product image
