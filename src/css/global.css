@@ -716,7 +716,7 @@ ol {
 }
 
 /* ----- CONFIRMED STATE ----- */
-.hero-dark__btn.ww-btn--confirmed .ww-btn__running,
+.hero-dark__btn.ww-btn--confirmed .ww-btn__label,
 .hero-dark__btn.ww-btn--confirmed .ww-btn__dog-stage {
     opacity: 0;
     transform: translate(-50%, calc(-50% - 8px));
@@ -740,6 +740,7 @@ ol {
     justify-content: flex-start;
     padding: 0 24px;
     box-sizing: border-box;
+    color: #121212;
 }
 
 .ww-btn__dog {
@@ -749,8 +750,6 @@ ol {
     /* JS sets translateX via --dog-x to spring the dog across */
     transform: translateX(var(--dog-x, -24px));
     will-change: transform;
-    color: #121212;
-    /* inherits stroke colour */
 }
 
 /* Gallop: alternate leg pairs */

@@ -662,21 +662,20 @@
         }
 
         heroBtn.addEventListener('click', function (e) {
-            e.preventDefault(); // anchor navigates; we animate instead
+            e.preventDefault();
+            e.stopImmediatePropagation(); // block smooth-scroll & any other click handlers
 
-            // Already in an animated state — do nothing
             if (heroBtn.classList.contains('ww-btn--running') ||
                 heroBtn.classList.contains('ww-btn--confirmed')) return;
 
             if (reducedMotion) {
-                // Skip straight to confirmed for reduced-motion users
                 heroBtn.classList.add('ww-btn--confirmed');
                 return;
             }
 
             heroBtn.classList.add('ww-btn--running');
             runDogAnimation();
-        });
+        }, { capture: true });
     }());
 
     // ========================================
