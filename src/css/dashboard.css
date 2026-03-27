@@ -1,0 +1,147 @@
+/* ========================================
+   DASHBOARD PAGE STYLES
+   ======================================== */
+
+.dashboard-main {
+    padding-top: calc(var(--header-height) + 48px);
+    padding-bottom: 80px;
+    min-height: 100vh;
+}
+
+/* ---- Guard overlay ---- */
+.dashboard-guard {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--color-bg);
+    z-index: 500;
+    place-items: center;
+}
+
+.dashboard-guard.is-visible {
+    display: grid;
+}
+
+.dashboard-guard__box {
+    text-align: center;
+    padding: 40px 32px;
+    border-radius: var(--radius-xl);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    max-width: 380px;
+    width: 90vw;
+}
+
+.dashboard-guard__icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+}
+
+.dashboard-guard__box h2 {
+    font-size: var(--font-size-xl);
+    color: var(--color-text);
+    margin-bottom: 10px;
+}
+
+.dashboard-guard__box p {
+    color: var(--color-text-light);
+    margin-bottom: 24px;
+}
+
+/* ---- Welcome ---- */
+.dashboard-welcome {
+    margin-bottom: 40px;
+}
+
+.dashboard-welcome__title {
+    font-size: var(--font-size-2xl);
+    font-weight: 800;
+    color: var(--color-text);
+    margin-bottom: 8px;
+}
+
+.dashboard-welcome__sub {
+    color: var(--color-text-light);
+}
+
+/* ---- Cards ---- */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+.dashboard-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dashboard-card__icon {
+    font-size: 2rem;
+    margin-bottom: 4px;
+}
+
+.dashboard-card h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.dashboard-card p {
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+    flex: 1;
+}
+
+/* ---- Account details ---- */
+.dashboard-account {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: 28px 24px;
+    max-width: 560px;
+}
+
+.dashboard-account h2 {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 20px;
+}
+
+.dashboard-account__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-border);
+    gap: 16px;
+}
+
+.dashboard-account__row:last-child {
+    border-bottom: none;
+}
+
+.dashboard-account__label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    font-weight: 600;
+}
+
+.dashboard-account__value {
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+}

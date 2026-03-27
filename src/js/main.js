@@ -7,6 +7,7 @@
     const hamburger = document.getElementById('hamburgerBtn');
     const navLinks = document.getElementById('navLinks');
     const navCta = document.querySelector('.navbar__cta');
+    const authControls = document.getElementById('authControls');
 
     if (hamburger) {
         hamburger.addEventListener('click', () => {
@@ -14,6 +15,7 @@
             hamburger.setAttribute('aria-expanded', !isOpen);
             navLinks.classList.toggle('is-open');
             if (navCta) navCta.classList.toggle('is-open');
+            if (authControls) authControls.classList.toggle('is-open');
         });
 
         // Close menu on link click
@@ -22,6 +24,7 @@
                 hamburger.setAttribute('aria-expanded', 'false');
                 navLinks.classList.remove('is-open');
                 if (navCta) navCta.classList.remove('is-open');
+                if (authControls) authControls.classList.remove('is-open');
             });
         });
     }
@@ -218,31 +221,58 @@
     // ========================================
     const waitlistForm = document.getElementById('waitlistForm');
     if (waitlistForm) {
-        waitlistForm.addEventListener('submit', (e) => {
+        waitlistForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const formData = new FormData(waitlistForm);
-            const name = formData.get('name') || '';
-            const email = formData.get('email') || '';
-            const role = formData.get('role') || '';
+            const name = String(formData.get('name') || '').trim();
+            const email = String(formData.get('email') || '').trim();
+            const role = String(formData.get('role') || '').trim();
 
+            const btn = waitlistForm.querySelector('.waitlist-form__btn');
+            const originalHTML = btn.innerHTML;
+            btn.disabled = true;
+            btn.textContent = 'Saving...';
+
+            // Try saving to Supabase first
+            let savedToDb = false;
+            const authConfig = window.WW_AUTH_CONFIG || {};
+            const hasUrl = !!authConfig.supabaseUrl && authConfig.supabaseUrl.indexOf('YOUR_PROJECT_ID') === -1;
+            const hasKey = !!authConfig.supabaseAnonKey && authConfig.supabaseAnonKey.indexOf('YOUR_SUPABASE_ANON_KEY') === -1;
+            const hasClient = !!(window.supabase && window.supabase.createClient);
+
+            if (hasUrl && hasKey && hasClient) {
+                try {
+                    const supabaseClient = window.supabase.createClient(authConfig.supabaseUrl, authConfig.supabaseAnonKey);
+                    const { error } = await supabaseClient.from('waitlist').insert([{
+                        name: name,
+                        email: email,
+                        role: role,
+                        signed_up_at: new Date().toISOString()
+                    }]);
+
+                    if (!error) savedToDb = true;
+                } catch (_err) {
+                    // fall through to email fallback
+                }
+            }
+
+            // Always also send email as backup
             const subject = encodeURIComponent('Waitlist Enquiry - ' + name);
             const body = encodeURIComponent(
                 'New Waitlist Enquiry\n\n' +
                 'Name: ' + name + '\n' +
                 'Email: ' + email + '\n' +
-                'Role: ' + role + '\n'
+                'Role: ' + role + '\n' +
+                (savedToDb ? '[Saved to database ✓]' : '[Database save failed — email only]')
             );
 
             window.location.href = 'mailto:admin@wigglywoosh.co.in?subject=' + subject + '&body=' + body;
 
-            const btn = waitlistForm.querySelector('.waitlist-form__btn');
-            const originalText = btn.textContent;
-            btn.textContent = '✓ Opening your email client...';
+            btn.textContent = '✓ ' + (savedToDb ? 'Saved! Opening email...' : 'Opening your email client...');
             btn.style.background = '#10B981';
-            btn.disabled = true;
 
-            setTimeout(() => {
-                btn.textContent = originalText;
+            setTimeout(function () {
+                btn.innerHTML = originalHTML;
                 btn.style.background = '';
                 btn.disabled = false;
                 waitlistForm.reset();
@@ -695,6 +725,313 @@
             heroBtn.classList.add('ww-btn--running');
             runDogAnimation();
         }, { capture: true });
+    }());
+
+    // ========================================
+    // AUTH — SUPABASE LOGIN / SIGNUP
+    // ========================================
+    (function () {
+        const authModal = document.getElementById('authModal');
+        const authModalClose = document.getElementById('authModalClose');
+        const authOpenButtons = document.querySelectorAll('.auth-open-btn');
+        const authStatus = document.getElementById('authStatus');
+        const authTabs = document.querySelectorAll('[data-auth-tab]');
+        const authTitle = document.getElementById('authModalTitle');
+
+        const signupForm = document.getElementById('signupForm');
+        const loginForm = document.getElementById('loginForm');
+        const forgotForm = document.getElementById('forgotForm');
+        const signupSubmitBtn = document.getElementById('signupSubmitBtn');
+        const loginSubmitBtn = document.getElementById('loginSubmitBtn');
+        const forgotSubmitBtn = document.getElementById('forgotSubmitBtn');
+        const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+
+        const authUserPanel = document.getElementById('authUserPanel');
+        const authUserEmail = document.getElementById('authUserEmail');
+        const authLogoutBtn = document.getElementById('authLogoutBtn');
+
+        if (!authModal || !signupForm || !loginForm) return;
+
+        function setStatus(message, kind) {
+            if (!authStatus) return;
+            authStatus.textContent = message || '';
+            authStatus.classList.remove('is-error', 'is-success');
+            if (kind === 'error') authStatus.classList.add('is-error');
+            if (kind === 'success') authStatus.classList.add('is-success');
+        }
+
+        function setLoading(button, loading, loadingText, idleText) {
+            if (!button) return;
+            button.disabled = loading;
+            button.textContent = loading ? loadingText : idleText;
+        }
+
+        function switchAuthMode(mode) {
+            const isForgot = mode === 'forgot';
+            const isSignup = !isForgot && mode !== 'login';
+            const isLogin = !isForgot && !isSignup;
+
+            signupForm.classList.toggle('is-hidden', !isSignup);
+            loginForm.classList.toggle('is-hidden', !isLogin);
+            if (forgotForm) forgotForm.classList.toggle('is-hidden', !isForgot);
+
+            const titles = { signup: 'Create your account', login: 'Log in to your account', forgot: 'Reset your password' };
+            if (authTitle) authTitle.textContent = titles[mode] || 'Create your account';
+
+            authTabs.forEach(function (tab) {
+                const active = tab.getAttribute('data-auth-tab') === mode;
+                tab.classList.toggle('is-active', active);
+                tab.setAttribute('aria-selected', active ? 'true' : 'false');
+            });
+
+            setStatus('');
+        }
+
+        function openAuthModal(mode) {
+            switchAuthMode(mode || 'signup');
+            authModal.classList.add('is-open');
+            authModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAuthModal() {
+            authModal.classList.remove('is-open');
+            authModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            setStatus('');
+        }
+
+        authOpenButtons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                openAuthModal(btn.getAttribute('data-auth-mode'));
+            });
+        });
+
+        authTabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                switchAuthMode(tab.getAttribute('data-auth-tab'));
+            });
+        });
+
+        if (authModalClose) {
+            authModalClose.addEventListener('click', closeAuthModal);
+        }
+
+        authModal.addEventListener('click', function (event) {
+            const clickedClose = event.target && event.target.hasAttribute('data-auth-close');
+            if (clickedClose) closeAuthModal();
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && authModal.classList.contains('is-open')) {
+                closeAuthModal();
+            }
+        });
+
+        function updateAuthUi(user) {
+            const loggedIn = !!user;
+
+            authOpenButtons.forEach(function (btn) {
+                btn.hidden = loggedIn;
+            });
+
+            if (authUserPanel) authUserPanel.hidden = !loggedIn;
+
+            if (authUserEmail) {
+                authUserEmail.textContent = loggedIn
+                    ? (user.email || (user.user_metadata && user.user_metadata.full_name) || 'Signed in')
+                    : '';
+            }
+        }
+
+        const authConfig = window.WW_AUTH_CONFIG || {};
+        const hasUrl = !!authConfig.supabaseUrl && authConfig.supabaseUrl.indexOf('YOUR_PROJECT_ID') === -1;
+        const hasAnonKey = !!authConfig.supabaseAnonKey && authConfig.supabaseAnonKey.indexOf('YOUR_SUPABASE_ANON_KEY') === -1;
+        const hasClient = !!(window.supabase && window.supabase.createClient);
+
+        if (!hasUrl || !hasAnonKey || !hasClient) {
+            updateAuthUi(null);
+            setStatus('Configure src/js/auth-config.js with your Supabase URL and anon key.', 'error');
+            signupForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                setStatus('Auth setup pending: please add Supabase credentials.', 'error');
+            });
+            loginForm.addEventListener('submit', function (event) {
+                event.preventDefault();
+                setStatus('Auth setup pending: please add Supabase credentials.', 'error');
+            });
+            return;
+        }
+
+        const supabaseClient = window.supabase.createClient(authConfig.supabaseUrl, authConfig.supabaseAnonKey);
+
+        async function refreshSessionUi() {
+            const result = await supabaseClient.auth.getSession();
+            const session = result && result.data ? result.data.session : null;
+            updateAuthUi(session ? session.user : null);
+        }
+
+        signupForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const data = new FormData(signupForm);
+            const name = String(data.get('name') || '').trim();
+            const email = String(data.get('email') || '').trim();
+            const password = String(data.get('password') || '');
+
+            if (!name || !email || password.length < 8) {
+                setStatus('Enter your name, a valid email, and a password with at least 8 characters.', 'error');
+                return;
+            }
+
+            setLoading(signupSubmitBtn, true, 'Creating account...', 'Create Account');
+            setStatus('');
+
+            try {
+                const response = await supabaseClient.auth.signUp({
+                    email: email,
+                    password: password,
+                    options: {
+                        data: {
+                            full_name: name
+                        }
+                    }
+                });
+
+                if (response.error) throw response.error;
+
+                const hasSession = !!(response.data && response.data.session);
+                if (hasSession) {
+                    setStatus('Account created and signed in successfully.', 'success');
+                    closeAuthModal();
+                } else {
+                    setStatus('Account created. Check your email to confirm your sign up.', 'success');
+                }
+
+                signupForm.reset();
+                await refreshSessionUi();
+            } catch (error) {
+                setStatus(error && error.message ? error.message : 'Unable to create account right now.', 'error');
+            } finally {
+                setLoading(signupSubmitBtn, false, 'Creating account...', 'Create Account');
+            }
+        });
+
+        loginForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const data = new FormData(loginForm);
+            const email = String(data.get('email') || '').trim();
+            const password = String(data.get('password') || '');
+
+            if (!email || !password) {
+                setStatus('Please enter your email and password.', 'error');
+                return;
+            }
+
+            setLoading(loginSubmitBtn, true, 'Logging in...', 'Log In');
+            setStatus('');
+
+            try {
+                const response = await supabaseClient.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (response.error) throw response.error;
+
+                setStatus('Logged in successfully.', 'success');
+                loginForm.reset();
+                closeAuthModal();
+                await refreshSessionUi();
+            } catch (error) {
+                setStatus(error && error.message ? error.message : 'Unable to log in right now.', 'error');
+            } finally {
+                setLoading(loginSubmitBtn, false, 'Logging in...', 'Log In');
+            }
+        });
+
+        if (forgotPasswordLink) {
+            forgotPasswordLink.addEventListener('click', function () {
+                switchAuthMode('forgot');
+            });
+        }
+
+        const googleSignInBtn = document.getElementById('googleSignInBtn');
+        if (googleSignInBtn) {
+            googleSignInBtn.addEventListener('click', async function () {
+                setStatus('');
+                googleSignInBtn.disabled = true;
+                googleSignInBtn.textContent = 'Redirecting to Google...';
+
+                try {
+                    const response = await supabaseClient.auth.signInWithOAuth({
+                        provider: 'google',
+                        options: {
+                            redirectTo: window.location.origin + window.location.pathname
+                        }
+                    });
+
+                    if (response.error) throw response.error;
+                    // Supabase will redirect the browser to Google
+                } catch (error) {
+                    setStatus(error && error.message ? error.message : 'Unable to sign in with Google right now.', 'error');
+                    googleSignInBtn.disabled = false;
+                    googleSignInBtn.textContent = 'Continue with Google';
+                }
+            });
+        }
+
+        if (forgotForm) {
+            forgotForm.addEventListener('submit', async function (event) {
+                event.preventDefault();
+
+                const data = new FormData(forgotForm);
+                const email = String(data.get('email') || '').trim();
+
+                if (!email) {
+                    setStatus('Please enter your email address.', 'error');
+                    return;
+                }
+
+                setLoading(forgotSubmitBtn, true, 'Sending...', 'Send Reset Link');
+                setStatus('');
+
+                try {
+                    const response = await supabaseClient.auth.resetPasswordForEmail(email, {
+                        redirectTo: window.location.origin + window.location.pathname
+                    });
+
+                    if (response.error) throw response.error;
+
+                    setStatus('Reset link sent. Check your email.', 'success');
+                    forgotForm.reset();
+                } catch (error) {
+                    setStatus(error && error.message ? error.message : 'Unable to send reset link right now.', 'error');
+                } finally {
+                    setLoading(forgotSubmitBtn, false, 'Sending...', 'Send Reset Link');
+                }
+            });
+        }
+
+        if (authLogoutBtn) {
+            authLogoutBtn.addEventListener('click', async function () {
+                setStatus('');
+                const response = await supabaseClient.auth.signOut();
+                if (response.error) {
+                    setStatus(response.error.message || 'Unable to log out right now.', 'error');
+                    return;
+                }
+
+                updateAuthUi(null);
+            });
+        }
+
+        supabaseClient.auth.onAuthStateChange(function (_event, session) {
+            updateAuthUi(session ? session.user : null);
+        });
+
+        refreshSessionUi();
     }());
 
     // ========================================

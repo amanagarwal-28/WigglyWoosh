@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+bower_components/
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Auth config — contains project-specific keys.
+# Copy auth-config.example.js and fill in your own values.
+src/js/auth-config.js
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/settings.json
+*.swp
+*.swo
+
+# Build outputs
+dist/
+build/
