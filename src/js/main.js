@@ -775,7 +775,6 @@
 
         const authUserPanel = document.getElementById('authUserPanel');
         const authUserEmail = document.getElementById('authUserEmail');
-        const authLogoutBtn = document.getElementById('authLogoutBtn');
 
         if (!authModal || !signupForm || !loginForm) return;
 
@@ -1066,19 +1065,6 @@
                 } finally {
                     setLoading(forgotSubmitBtn, false, 'Sending...', 'Send Reset Link');
                 }
-            });
-        }
-
-        if (authLogoutBtn) {
-            authLogoutBtn.addEventListener('click', async function () {
-                setStatus('');
-                const response = await supabaseClient.auth.signOut();
-                if (response.error) {
-                    setStatus(response.error.message || 'Unable to log out right now.', 'error');
-                    return;
-                }
-
-                updateAuthUi(null);
             });
         }
 

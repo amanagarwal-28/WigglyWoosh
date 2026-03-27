@@ -22,7 +22,6 @@
     const content = document.getElementById('dashboardContent');
     const authUserEmail = document.getElementById('authUserEmail');
     const authUserPanel = document.getElementById('authUserPanel');
-    const authLogoutBtn = document.getElementById('authLogoutBtn');
     const dashboardUserName = document.getElementById('dashboardUserName');
     const dashboardEmail = document.getElementById('dashboardEmail');
     const dashboardCreatedAt = document.getElementById('dashboardCreatedAt');
@@ -83,11 +82,4 @@
         }
     });
 
-    // Log out
-    if (authLogoutBtn) {
-        authLogoutBtn.addEventListener('click', async function () {
-            await supabaseClient.auth.signOut();
-            window.location.href = 'index.html';
-        });
-    }
 }());
