@@ -7,9 +7,8 @@ bower_components/
 .env.local
 .env.*.local
 
-# Auth config — contains project-specific keys.
-# Copy auth-config.example.js and fill in your own values.
-src/js/auth-config.js
+# Auth config uses Supabase publishable key (safe for frontend).
+# Keep server secrets only in environment files.
 
 # OS
 .DS_Store
