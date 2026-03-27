@@ -444,7 +444,7 @@ ol {
 }
 
 .auth-modal__tabs {
-    display: grid;
+    display: none;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
     margin-bottom: 18px;
@@ -520,6 +520,24 @@ ol {
 }
 
 .auth-form__forgot-link:hover {
+    color: #93c5fd;
+    text-decoration: underline;
+}
+
+.auth-form__switch-link {
+    display: block;
+    margin-top: 2px;
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    font-size: var(--font-size-xs);
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+    padding: 4px 0;
+}
+
+.auth-form__switch-link:hover {
     color: #93c5fd;
     text-decoration: underline;
 }
@@ -2864,6 +2882,11 @@ tbody tr:last-child .comparison__highlight::before {
     background: rgba(255, 255, 255, 0.1);
 }
 
+.waitlist-form__input[readonly] {
+    opacity: 0.85;
+    cursor: not-allowed;
+}
+
 .waitlist-form__input option {
     color: #F5F5F5;
     background: #1E1E1E;
@@ -2886,6 +2909,17 @@ tbody tr:last-child .comparison__highlight::before {
     font-size: var(--font-size-xs);
     color: rgba(255, 255, 255, 0.4);
     margin-top: var(--space-md);
+}
+
+.waitlist-form__status {
+    margin-top: 10px;
+    min-height: 20px;
+    font-size: var(--font-size-xs);
+    color: #86efac;
+}
+
+.waitlist-form__status.is-error {
+    color: #fca5a5;
 }
 
 /* --- Waitlist social proof counter --- */
@@ -3073,6 +3107,31 @@ tbody tr:last-child .comparison__highlight::before {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ========================================
+   ENQUIRY CHAT FAB
+   ======================================== */
+.enquiry-chat-fab {
+    position: fixed;
+    right: 18px;
+    bottom: 90px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.45);
+    z-index: 998;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.enquiry-chat-fab:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 16px 34px rgba(37, 99, 235, 0.5);
 }
 
 /* ========================================
@@ -3880,6 +3939,11 @@ tbody tr:last-child .comparison__highlight::before {
     background: #FFFFFF;
 }
 
+[data-theme="light"] .enquiry-chat-fab {
+    color: #ffffff;
+    box-shadow: 0 12px 24px rgba(59, 130, 246, 0.35);
+}
+
 /* --- Footer (stays dark for contrast) --- */
 [data-theme="light"] .site-footer {
     background: #0f172a;
@@ -3893,6 +3957,10 @@ tbody tr:last-child .comparison__highlight::before {
 
 /* --- Mobile nav --- */
 @media (max-width: 768px) {
+    .enquiry-chat-fab {
+        bottom: 96px;
+    }
+
     [data-theme="light"] .navbar__links.is-open {
         background: #FFFFFF;
     }

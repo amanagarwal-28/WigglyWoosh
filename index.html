@@ -47,9 +47,7 @@
                 <a href="#waitlist" class="btn btn--primary navbar__cta">Join the Future of Pet Care</a>
 
                 <div class="navbar__auth" id="authControls">
-                    <button type="button" class="btn btn--outline btn--sm auth-open-btn" data-auth-mode="login">Log
-                        In</button>
-                    <button type="button" class="btn btn--primary btn--sm auth-open-btn" data-auth-mode="signup">Sign
+                    <button type="button" class="btn btn--primary btn--sm auth-open-btn" data-auth-mode="login">Sign
                         Up</button>
 
                     <div class="navbar__auth-user" id="authUserPanel" hidden>
@@ -824,13 +822,13 @@
                     </p>
                     <form class="waitlist-form" id="waitlistForm" action="#" method="POST">
                         <div class="waitlist-form__row">
-                            <input type="text" name="name" placeholder="Your Name" required class="waitlist-form__input"
-                                aria-label="Your Name">
-                            <input type="email" name="email" placeholder="Your Email" required
+                            <input type="text" id="waitlistName" name="name" placeholder="Your Name" required
+                                class="waitlist-form__input" aria-label="Your Name">
+                            <input type="email" id="waitlistEmail" name="email" placeholder="Your Email" required
                                 class="waitlist-form__input" aria-label="Your Email">
                         </div>
                         <div class="waitlist-form__row">
-                            <select name="role" class="waitlist-form__input" aria-label="I am a...">
+                            <select id="waitlistRole" name="role" class="waitlist-form__input" aria-label="I am a...">
                                 <option value="" disabled selected>I am a...</option>
                                 <option value="pet-parent">Pet Parent</option>
                                 <option value="veterinarian">Veterinarian</option>
@@ -845,6 +843,7 @@
                         <span class="waitlist-counter__dot"></span>
                         <span><strong>1,240+</strong> pet parents already on the waitlist</span>
                     </div>
+                    <p class="waitlist-form__status" id="waitlistStatus" aria-live="polite"></p>
                     <p class="waitlist-form__note">No spam. Only major updates. Unsubscribe anytime.</p>
                 </div>
             </div>
@@ -912,6 +911,15 @@
         </div>
     </footer>
 
+    <a href="mailto:hello@wigglywoosh.com?subject=Wiggly%20Woosh%20Enquiry" class="enquiry-chat-fab"
+        aria-label="Send enquiry by email" title="Send enquiry">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <path d="M21 15a4 4 0 0 1-4 4H7l-4 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8z" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </a>
+
     <div class="auth-modal" id="authModal" aria-hidden="true" role="dialog" aria-modal="true"
         aria-labelledby="authModalTitle">
         <div class="auth-modal__backdrop" data-auth-close></div>
@@ -945,6 +953,8 @@
 
                 <button type="submit" class="btn btn--primary btn--full auth-form__submit" id="signupSubmitBtn">Create
                     Account</button>
+                <button type="button" class="auth-form__switch-link" id="switchToLoginLink">Already have an account? Log
+                    in</button>
             </form>
 
             <form class="auth-form is-hidden" id="loginForm" novalidate>
@@ -959,6 +969,8 @@
                 <button type="submit" class="btn btn--primary btn--full auth-form__submit" id="loginSubmitBtn">Log
                     In</button>
                 <button type="button" class="auth-form__forgot-link" id="forgotPasswordLink">Forgot password?</button>
+                <button type="button" class="auth-form__switch-link" id="switchToSignupLink">Don't have an account?
+                    Sign up</button>
             </form>
 
             <form class="auth-form is-hidden" id="forgotForm" novalidate>

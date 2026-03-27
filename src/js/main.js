@@ -220,63 +220,88 @@
     // WAITLIST FORM HANDLER
     // ========================================
     const waitlistForm = document.getElementById('waitlistForm');
+    const waitlistEmailInput = document.getElementById('waitlistEmail');
+    const waitlistNameInput = document.getElementById('waitlistName');
+    const waitlistStatus = document.getElementById('waitlistStatus');
+
+    function setWaitlistStatus(message, isError) {
+        if (!waitlistStatus) return;
+        waitlistStatus.textContent = message || '';
+        waitlistStatus.classList.toggle('is-error', !!isError);
+    }
+
     if (waitlistForm) {
         waitlistForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const formData = new FormData(waitlistForm);
             const name = String(formData.get('name') || '').trim();
-            const email = String(formData.get('email') || '').trim();
             const role = String(formData.get('role') || '').trim();
 
             const btn = waitlistForm.querySelector('.waitlist-form__btn');
             const originalHTML = btn.innerHTML;
             btn.disabled = true;
             btn.textContent = 'Saving...';
+            setWaitlistStatus('');
 
-            // Try saving to Supabase first
-            let savedToDb = false;
             const authConfig = window.WW_AUTH_CONFIG || {};
             const hasUrl = !!authConfig.supabaseUrl && authConfig.supabaseUrl.indexOf('YOUR_PROJECT_ID') === -1;
             const hasKey = !!authConfig.supabaseAnonKey && authConfig.supabaseAnonKey.indexOf('YOUR_SUPABASE_ANON_KEY') === -1;
             const hasClient = !!(window.supabase && window.supabase.createClient);
 
-            if (hasUrl && hasKey && hasClient) {
-                try {
-                    const supabaseClient = window.supabase.createClient(authConfig.supabaseUrl, authConfig.supabaseAnonKey);
-                    const { error } = await supabaseClient.from('waitlist').insert([{
-                        name: name,
-                        email: email,
-                        role: role,
-                        signed_up_at: new Date().toISOString()
-                    }]);
-
-                    if (!error) savedToDb = true;
-                } catch (_err) {
-                    // fall through to email fallback
-                }
+            if (!hasUrl || !hasKey || !hasClient) {
+                setWaitlistStatus('Auth setup is missing. Please configure Supabase keys first.', true);
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                return;
             }
 
-            // Always also send email as backup
-            const subject = encodeURIComponent('Waitlist Enquiry - ' + name);
-            const body = encodeURIComponent(
-                'New Waitlist Enquiry\n\n' +
-                'Name: ' + name + '\n' +
-                'Email: ' + email + '\n' +
-                'Role: ' + role + '\n' +
-                (savedToDb ? '[Saved to database ✓]' : '[Database save failed — email only]')
-            );
+            try {
+                const supabaseClient = window.supabase.createClient(authConfig.supabaseUrl, authConfig.supabaseAnonKey);
+                const sessionResult = await supabaseClient.auth.getSession();
+                const session = sessionResult && sessionResult.data ? sessionResult.data.session : null;
+                const user = session ? session.user : null;
 
-            window.location.href = 'mailto:admin@wigglywoosh.co.in?subject=' + subject + '&body=' + body;
+                if (!user || !user.email) {
+                    setWaitlistStatus('Please log in first, then join the waitlist.', true);
+                    const loginTrigger = document.querySelector('.auth-open-btn[data-auth-mode="login"]');
+                    if (loginTrigger) loginTrigger.click();
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                    return;
+                }
 
-            btn.textContent = '✓ ' + (savedToDb ? 'Saved! Opening email...' : 'Opening your email client...');
-            btn.style.background = '#10B981';
+                if (waitlistEmailInput) {
+                    waitlistEmailInput.value = user.email;
+                    waitlistEmailInput.readOnly = true;
+                }
 
-            setTimeout(function () {
+                const { error } = await supabaseClient.from('waitlist').insert([{
+                    name: name,
+                    email: user.email,
+                    role: role,
+                    signed_up_at: new Date().toISOString()
+                }]);
+
+                if (error) throw error;
+
+                btn.textContent = '✓ Added to waitlist';
+                btn.style.background = '#10B981';
+                setWaitlistStatus('Saved. You are now on the waitlist.', false);
+
+                setTimeout(function () {
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                    if (waitlistNameInput) waitlistNameInput.value = '';
+                    const roleSelect = document.getElementById('waitlistRole');
+                    if (roleSelect) roleSelect.selectedIndex = 0;
+                }, 2200);
+            } catch (error) {
+                setWaitlistStatus(error && error.message ? error.message : 'Unable to save right now. Please retry.', true);
                 btn.innerHTML = originalHTML;
                 btn.style.background = '';
                 btn.disabled = false;
-                waitlistForm.reset();
-            }, 3000);
+            }
         });
     }
 
@@ -745,6 +770,8 @@
         const loginSubmitBtn = document.getElementById('loginSubmitBtn');
         const forgotSubmitBtn = document.getElementById('forgotSubmitBtn');
         const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+        const switchToSignupLink = document.getElementById('switchToSignupLink');
+        const switchToLoginLink = document.getElementById('switchToLoginLink');
 
         const authUserPanel = document.getElementById('authUserPanel');
         const authUserEmail = document.getElementById('authUserEmail');
@@ -788,7 +815,7 @@
         }
 
         function openAuthModal(mode) {
-            switchAuthMode(mode || 'signup');
+            switchAuthMode(mode || 'login');
             authModal.classList.add('is-open');
             authModal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
@@ -841,6 +868,22 @@
                 authUserEmail.textContent = loggedIn
                     ? (user.email || (user.user_metadata && user.user_metadata.full_name) || 'Signed in')
                     : '';
+            }
+
+            if (waitlistEmailInput) {
+                if (loggedIn && user.email) {
+                    waitlistEmailInput.value = user.email;
+                    waitlistEmailInput.readOnly = true;
+                } else {
+                    waitlistEmailInput.readOnly = false;
+                    waitlistEmailInput.value = '';
+                }
+            }
+
+            if (waitlistNameInput && loggedIn && user.user_metadata && user.user_metadata.full_name) {
+                if (!waitlistNameInput.value.trim()) {
+                    waitlistNameInput.value = user.user_metadata.full_name;
+                }
             }
         }
 
@@ -954,6 +997,18 @@
         if (forgotPasswordLink) {
             forgotPasswordLink.addEventListener('click', function () {
                 switchAuthMode('forgot');
+            });
+        }
+
+        if (switchToSignupLink) {
+            switchToSignupLink.addEventListener('click', function () {
+                switchAuthMode('signup');
+            });
+        }
+
+        if (switchToLoginLink) {
+            switchToLoginLink.addEventListener('click', function () {
+                switchAuthMode('login');
             });
         }
 
